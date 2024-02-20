@@ -1,8 +1,7 @@
+// Constants - utils
 import { auth, GoogleProvider } from '@/services/firebase';
 import { signInWithPopup } from 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
-
-// TODO: fix linting problems
 
 export default function Landing() {
   const [user] = useAuthState(auth);
@@ -11,12 +10,16 @@ export default function Landing() {
     try {
       await signInWithPopup(auth, GoogleProvider);
     } catch (error) {
-      console.error('Error signing in with Google:', error);
+      console.error('Error signing in with Google: ', error);
     }
   };
 
-  const handleLogout = () => {
-    auth.signOut();
+  const handleLogout = async () => {
+    try {
+      await auth.signOut();
+    } catch (error) {
+      console.error('Error signing out: ', error);
+    }
   };
 
   return (
