@@ -4,7 +4,7 @@ import { signInWithPopup } from 'firebase/auth';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
-export default function Landing() {
+export default function LandingPage() {
   const [user] = useAuthState(auth);
 
   const signInWithGoogle = async () => {
