@@ -5,4 +5,8 @@ export default {
     extend: {},
   },
   plugins: [],
+  // Enable tailwind for antd
+  corePlugins: {
+    preflight: false,
+  }
 };
