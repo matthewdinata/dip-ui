@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 // Pages
 import DashboardPage from './pages/DashboardPage';
 import LandingPage from './pages/LandingPage';
+import NewsPage from './pages/NewsPage';
 
 function App() {
   return (
@@ -19,6 +20,10 @@ function App() {
           <Route
             path='/dashboard'
             element={<DashboardPage />}
+          />
+          <Route
+            path='/news'
+            element={<NewsPage />}
           />
         </Routes>
       </Router>
