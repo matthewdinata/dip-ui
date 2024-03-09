@@ -17,6 +17,15 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Prevent any misalignment */
+* {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+  outline: none;
+  border: 0px;
+}
+
 a {
   font-weight: 500;
   color: #646cff;

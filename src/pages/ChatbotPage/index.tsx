@@ -87,9 +87,9 @@ export const ChatbotPage = () => {
   return (
     // Todo: Add navbar
     <div className="relative h-screen max-w-screen overflow-hidden">
-      <div className="flex flex-col gap-3 w-full h-full justify-center items-center overflow-hidden">
-        <div className="flex-1 w-full h-full flex justify-center items-center overflow-y-auto">
-          <div className="min-w-[360px] w-3/5 h-full">
+      <div className="flex flex-col gap-9 w-full h-full justify-center items-center overflow-hidden py-8">
+        <div className="flex-1 w-full h-full flex justify-center items-center overflow-y-auto px-2">
+          <div className="min-w-[330px] w-3/5 h-full">
             <div className="w-full flex flex-col gap-7 my-4 flex-1">
               {/* Message compnent will be mapped from state */}
               {messages.map(message => <Message ProfilePic={message.ProfilePic} Message={message.Message} />)}
@@ -97,7 +97,7 @@ export const ChatbotPage = () => {
           </div>
         </div>
         {/* Use antdesign component */}
-        <div className="w-full flex justify-center gap-1 p-2">
+        <div className="w-full flex justify-center gap-1">
           <div className="min-w-[360px] w-3/5">
             <Search placeholder="Enter your message here"
               onSearch={handleSearch}
