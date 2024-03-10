@@ -42,6 +42,7 @@ export default function QuizPage() {
         <div className='flex flex-wrap gap-10 items-center'>
           <Button
             title='Drugs'
+            link= 'https://docs.google.com/forms/d/e/1FAIpQLSfwytZYKTldmYdbptONKEuVoSguHkEqFgjhl99XhITs_CRvOw/viewform'
             imageClassName='h-[105%] w-[105%]'
           />
           <Button
@@ -56,6 +57,7 @@ export default function QuizPage() {
           />
           <Button
             title='Heritage'
+            link= 'https://docs.google.com/forms/d/e/1FAIpQLSdee7Xxjr4tAP8TGAnCRUIg5BLAVfPRPC5kslhqZoM50M3P3A/viewform'
             imageClassName='h-[105%] w-[105%]'
           />
         </div>
