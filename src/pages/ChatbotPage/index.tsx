@@ -1,5 +1,5 @@
 import ChatbotIcon from "@/assets/ChatbotIcon.svg"
-import { IoMdPerson } from "react-icons/io";
+import DefaultProfile from "@/assets/DefaultProfile.svg";
 import { FaCircleChevronRight } from "react-icons/fa6";
 import { Message } from "./components/Messages"
 import Search, { SearchProps } from "antd/es/input/Search";
@@ -9,48 +9,48 @@ import { MessageProps } from "./components/Messages";
 // Mock data
 const mockMessages = [
   {
-    ProfilePic: ChatbotIcon,
-    Message: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero nam nisi expedita ducimus suscipit deserunt odit debitis sunt hic ad tenetur laudantium fugiat perspiciatis fuga, ipsam, omnis dolorem ipsum. At?Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero nam nisi expedita ducimus suscipit deserunt odit debitis sunt hic ad tenetur laudantium fugiat perspiciatis fuga, ipsam, omnis dolorem ipsum. At?"
+    profilePic: ChatbotIcon,
+    message: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero nam nisi expedita ducimus suscipit deserunt odit debitis sunt hic ad tenetur laudantium fugiat perspiciatis fuga, ipsam, omnis dolorem ipsum. At?Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero nam nisi expedita ducimus suscipit deserunt odit debitis sunt hic ad tenetur laudantium fugiat perspiciatis fuga, ipsam, omnis dolorem ipsum. At?"
   },
   {
-    ProfilePic: IoMdPerson,
-    Message: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero nam nisi expedita ducimus suscipit deserunt odit debitis sunt hic ad tenetur laudantium fugiat perspiciatis fuga, ipsam, omnis dolorem ipsum. At?Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero nam nisi expedita ducimus suscipit deserunt odit debitis sunt hic ad tenetur laudantium fugiat perspiciatis fuga, ipsam, omnis dolorem ipsum. At?"
+    profilePic: DefaultProfile,
+    message: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero nam nisi expedita ducimus suscipit deserunt odit debitis sunt hic ad tenetur laudantium fugiat perspiciatis fuga, ipsam, omnis dolorem ipsum. At?Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero nam nisi expedita ducimus suscipit deserunt odit debitis sunt hic ad tenetur laudantium fugiat perspiciatis fuga, ipsam, omnis dolorem ipsum. At?"
   },
   {
-    ProfilePic: ChatbotIcon,
-    Message: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero nam nisi expedita ducimus suscipit deserunt odit debitis sunt hic ad tenetur laudantium fugiat perspiciatis fuga, ipsam, omnis dolorem ipsum. At?Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero nam nisi expedita ducimus suscipit deserunt odit debitis sunt hic ad tenetur laudantium fugiat perspiciatis fuga, ipsam, omnis dolorem ipsum. At?"
+    profilePic: ChatbotIcon,
+    message: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero nam nisi expedita ducimus suscipit deserunt odit debitis sunt hic ad tenetur laudantium fugiat perspiciatis fuga, ipsam, omnis dolorem ipsum. At?Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero nam nisi expedita ducimus suscipit deserunt odit debitis sunt hic ad tenetur laudantium fugiat perspiciatis fuga, ipsam, omnis dolorem ipsum. At?"
   },
   {
-    ProfilePic: IoMdPerson,
-    Message: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero nam nisi expedita ducimus suscipit deserunt odit debitis sunt hic ad tenetur laudantium fugiat perspiciatis fuga, ipsam, omnis dolorem ipsum. At?Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero nam nisi expedita ducimus suscipit deserunt odit debitis sunt hic ad tenetur laudantium fugiat perspiciatis fuga, ipsam, omnis dolorem ipsum. At?"
+    profilePic: DefaultProfile,
+    message: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero nam nisi expedita ducimus suscipit deserunt odit debitis sunt hic ad tenetur laudantium fugiat perspiciatis fuga, ipsam, omnis dolorem ipsum. At?Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero nam nisi expedita ducimus suscipit deserunt odit debitis sunt hic ad tenetur laudantium fugiat perspiciatis fuga, ipsam, omnis dolorem ipsum. At?"
   },
   {
-    ProfilePic: ChatbotIcon,
-    Message: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero nam nisi expedita ducimus suscipit deserunt odit debitis sunt hic ad tenetur laudantium fugiat perspiciatis fuga, ipsam, omnis dolorem ipsum. At?Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero nam nisi expedita ducimus suscipit deserunt odit debitis sunt hic ad tenetur laudantium fugiat perspiciatis fuga, ipsam, omnis dolorem ipsum. At?"
+    profilePic: ChatbotIcon,
+    message: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero nam nisi expedita ducimus suscipit deserunt odit debitis sunt hic ad tenetur laudantium fugiat perspiciatis fuga, ipsam, omnis dolorem ipsum. At?Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero nam nisi expedita ducimus suscipit deserunt odit debitis sunt hic ad tenetur laudantium fugiat perspiciatis fuga, ipsam, omnis dolorem ipsum. At?"
   },
   {
-    ProfilePic: IoMdPerson,
-    Message: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero nam nisi expedita ducimus suscipit deserunt odit debitis sunt hic ad tenetur laudantium fugiat perspiciatis fuga, ipsam, omnis dolorem ipsum. At?Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero nam nisi expedita ducimus suscipit deserunt odit debitis sunt hic ad tenetur laudantium fugiat perspiciatis fuga, ipsam, omnis dolorem ipsum. At?"
+    profilePic: DefaultProfile,
+    message: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero nam nisi expedita ducimus suscipit deserunt odit debitis sunt hic ad tenetur laudantium fugiat perspiciatis fuga, ipsam, omnis dolorem ipsum. At?Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero nam nisi expedita ducimus suscipit deserunt odit debitis sunt hic ad tenetur laudantium fugiat perspiciatis fuga, ipsam, omnis dolorem ipsum. At?"
   },
   {
-    ProfilePic: ChatbotIcon,
-    Message: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero nam nisi expedita ducimus suscipit deserunt odit debitis sunt hic ad tenetur laudantium fugiat perspiciatis fuga, ipsam, omnis dolorem ipsum. At?Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero nam nisi expedita ducimus suscipit deserunt odit debitis sunt hic ad tenetur laudantium fugiat perspiciatis fuga, ipsam, omnis dolorem ipsum. At?"
+    profilePic: ChatbotIcon,
+    message: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero nam nisi expedita ducimus suscipit deserunt odit debitis sunt hic ad tenetur laudantium fugiat perspiciatis fuga, ipsam, omnis dolorem ipsum. At?Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero nam nisi expedita ducimus suscipit deserunt odit debitis sunt hic ad tenetur laudantium fugiat perspiciatis fuga, ipsam, omnis dolorem ipsum. At?"
   },
   {
-    ProfilePic: IoMdPerson,
-    Message: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero nam nisi expedita ducimus suscipit deserunt odit debitis sunt hic ad tenetur laudantium fugiat perspiciatis fuga, ipsam, omnis dolorem ipsum. At?Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero nam nisi expedita ducimus suscipit deserunt odit debitis sunt hic ad tenetur laudantium fugiat perspiciatis fuga, ipsam, omnis dolorem ipsum. At?"
+    profilePic: DefaultProfile,
+    message: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero nam nisi expedita ducimus suscipit deserunt odit debitis sunt hic ad tenetur laudantium fugiat perspiciatis fuga, ipsam, omnis dolorem ipsum. At?Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero nam nisi expedita ducimus suscipit deserunt odit debitis sunt hic ad tenetur laudantium fugiat perspiciatis fuga, ipsam, omnis dolorem ipsum. At?"
   },
   {
-    ProfilePic: ChatbotIcon,
-    Message: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero nam nisi expedita ducimus suscipit deserunt odit debitis sunt hic ad tenetur laudantium fugiat perspiciatis fuga, ipsam, omnis dolorem ipsum. At?Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero nam nisi expedita ducimus suscipit deserunt odit debitis sunt hic ad tenetur laudantium fugiat perspiciatis fuga, ipsam, omnis dolorem ipsum. At?"
+    profilePic: ChatbotIcon,
+    message: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero nam nisi expedita ducimus suscipit deserunt odit debitis sunt hic ad tenetur laudantium fugiat perspiciatis fuga, ipsam, omnis dolorem ipsum. At?Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero nam nisi expedita ducimus suscipit deserunt odit debitis sunt hic ad tenetur laudantium fugiat perspiciatis fuga, ipsam, omnis dolorem ipsum. At?"
   },
   {
-    ProfilePic: IoMdPerson,
-    Message: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero nam nisi expedita ducimus suscipit deserunt odit debitis sunt hic ad tenetur laudantium fugiat perspiciatis fuga, ipsam, omnis dolorem ipsum. At?Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero nam nisi expedita ducimus suscipit deserunt odit debitis sunt hic ad tenetur laudantium fugiat perspiciatis fuga, ipsam, omnis dolorem ipsum. At?"
+    profilePic: DefaultProfile,
+    message: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero nam nisi expedita ducimus suscipit deserunt odit debitis sunt hic ad tenetur laudantium fugiat perspiciatis fuga, ipsam, omnis dolorem ipsum. At?Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero nam nisi expedita ducimus suscipit deserunt odit debitis sunt hic ad tenetur laudantium fugiat perspiciatis fuga, ipsam, omnis dolorem ipsum. At?"
   },
   {
-    ProfilePic: ChatbotIcon,
-    Message: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero nam nisi expedita ducimus suscipit deserunt odit debitis sunt hic ad tenetur laudantium fugiat perspiciatis fuga, ipsam, omnis dolorem ipsum. At?Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero nam nisi expedita ducimus suscipit deserunt odit debitis sunt hic ad tenetur laudantium fugiat perspiciatis fuga, ipsam, omnis dolorem ipsum. At?"
+    profilePic: ChatbotIcon,
+    message: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero nam nisi expedita ducimus suscipit deserunt odit debitis sunt hic ad tenetur laudantium fugiat perspiciatis fuga, ipsam, omnis dolorem ipsum. At?Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero nam nisi expedita ducimus suscipit deserunt odit debitis sunt hic ad tenetur laudantium fugiat perspiciatis fuga, ipsam, omnis dolorem ipsum. At?"
   },
 ]
 
@@ -67,24 +67,24 @@ export const ChatbotPage = () => {
   // handleSearch input
   const handleSearch: SearchProps['onSearch'] = (value, e) => {
     e?.preventDefault();
-    // Todo, change profilepic to user.profile from firebase
+    // Todo, change profilePic to user.profile from firebase
     
     if(inputValue !== ""){
       // Append to messages, user first
       setMessages(prevMessages => [...prevMessages,
         {
-          ProfilePic: IoMdPerson,
-          Message: value
+          profilePic: DefaultProfile,
+          message: value
         }]
       );
       // Clear input
       setInputValue('');
-      
+
       // Todo: Intergration of backend api to here
     }
   }
 
-  // When messge state is update, the user will be dragged to the bottom of chat
+  // When messge state is update, the user will be dragged to the bottom of chat.
   useEffect(() =>{
     // Scroll to the bottom
     messageContainerRef.current?.scrollIntoView({ block: 'end',behavior: 'smooth'});
@@ -104,7 +104,7 @@ export const ChatbotPage = () => {
           <div className="min-w-[330px] w-3/5 h-full">
             <div ref={messageContainerRef} className="w-full flex flex-col gap-7 my-4 flex-1">
               {/* Message compnent will be mapped from state */}
-              {messages.map((message, i) => <Message key={i} ProfilePic={message.ProfilePic} Message={message.Message} />)}
+              {messages.map((message, i) => <Message key={i} profilePic={message.profilePic} message={message.message} />)}
             </div>
           </div>
         </div>
