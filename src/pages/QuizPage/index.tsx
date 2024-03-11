@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { IoIosArrowBack } from 'react-icons/io';
 
@@ -38,7 +37,7 @@ export default function QuizPage() {
     <div className='min-h-screen'>
       <div className='mb-12 mt-24 flex flex-col gap-16'>
         <IoIosArrowBack className='text-2xl' />
-        <header className='text-5xl font-bold text-center'>Quiz Yourself!</header>
+        <div className='text-5xl font-bold text-center'>Quiz Yourself!</div>
         <div className='flex flex-wrap gap-10 items-center'>
           <Button
             title='Drugs'
