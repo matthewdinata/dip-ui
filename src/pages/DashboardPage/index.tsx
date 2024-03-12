@@ -126,11 +126,15 @@ export default function DashboardPage() {
             thumbnailImage={crosswordThumbnail}
             imageClassName='h-full w-full'
           />
-          <GameThumbnail
-            title='Quiz Yourself!'
-            thumbnailImage={quizThumbnail}
-            imageClassName='h-full w-full'
-          />
+
+          {/* TODO: fix navigation code practice */}
+          <div onClick={() => navigate('/quiz')}>
+            <GameThumbnail
+              title='Quiz Yourself!'
+              thumbnailImage={quizThumbnail}
+              imageClassName='h-full w-full'
+            />
+          </div>
           <GameThumbnail
             title='Puzzle'
             thumbnailImage={puzzleThumbnail}
