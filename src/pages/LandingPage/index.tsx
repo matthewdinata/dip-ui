@@ -3,6 +3,7 @@ import { auth, db, GoogleProvider } from '@/services/firebase';
 import { signInWithPopup } from 'firebase/auth';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { useNavigate } from 'react-router-dom';
 
 export default function LandingPage() {
   const [user] = useAuthState(auth);
@@ -34,12 +35,18 @@ export default function LandingPage() {
     }
   };
 
+  // Handle navigation
+  const navigate = useNavigate();
+  const handleNavigateToDashboardPage = () => {
+    navigate('/dashboard');
+  };
+
   return (
     <>
-      <div>
+      <div className='w-screen'>
         {user ? (
-          <div>
-            <div className='mb-24 flex flex-col gap-2 items-center'>
+          <div className='flex flex-col items-center'>
+            <div className='mb-24 flex flex-col gap-2 items-center justify-center'>
               <div className='mx-8 mb-4'>
                 <img
                   src={user?.photoURL || ''}
@@ -56,13 +63,27 @@ export default function LandingPage() {
                 <span className='text-emerald-700'>{user.email}</span>
               </div>
             </div>
-            <button onClick={handleLogout}>LOG OUT</button>
+            <div className='flex flex-row gap-4'>
+              <button
+                onClick={handleNavigateToDashboardPage}
+                className='bg-lime-500 bg-opacity-40'
+              >
+                START THE ADVENTURE
+              </button>
+              <button
+                onClick={handleLogout}
+                className='bg-red-300 bg-opacity-40'
+              >
+                LOG OUT
+              </button>
+            </div>
           </div>
         ) : (
-          <div>
+          <div className='flex flex-col items-center'>
             <div className='mb-8 text-5xl font-semibold'>
               Welcome to our Super App!
             </div>
+
             <button onClick={signInWithGoogle}>SIGN IN WITH GOOGLE</button>
           </div>
         )}
