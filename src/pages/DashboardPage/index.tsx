@@ -1,6 +1,9 @@
 // Assets
 import { IoIosArrowForward } from 'react-icons/io';
-import ARIcon from '@/assets/ARIcon@3x.png';
+import arThumbnail from '@/assets/arThumbnail@3x.png';
+import crosswordThumbnail from '@/assets/crosswordThumbnail@3x.png';
+import puzzleThumbnail from '@/assets/puzzleThumbnail@3x.png';
+import quizThumbnail from '@/assets/quizThumbnail@3x.png';
 import newsThumbnail from '@/assets/newsThumbnail@3x.png';
 
 // Constants - utils
@@ -16,17 +19,23 @@ const InsightThumbnail = ({
   imageClassName?: string;
 }) => {
   return (
-    <div className='h-40 w-56 rounded-3xl overflow-hidden relative'>
-      <div className='bg-blue-200 h-full w-full'>
-        <img
-          className={imageClassName}
-          src={thumbnailImage}
-        />
+    <a
+      href={'https://example.com/news'}
+      target='_blank'
+      rel='noreferrer'
+    >
+      <div className='h-40 w-56 rounded-3xl overflow-hidden relative'>
+        <div className='bg-blue-200 h-full w-full'>
+          <img
+            className={imageClassName}
+            src={thumbnailImage}
+          />
+        </div>
+        <div className='absolute bottom-0 text-xs text-white bg-gray-800 bg-opacity-50 px-4'>
+          {title}
+        </div>
       </div>
-      <div className='absolute bottom-0 text-xs text-white bg-gray-800 bg-opacity-50 px-4'>
-        {title}
-      </div>
-    </div>
+    </a>
   );
 };
 
@@ -60,7 +69,7 @@ export default function DashboardPage() {
   };
   return (
     <div className='min-h-screen'>
-      <div className='mb-12 mt-24 flex flex-col gap-2'>
+      <div className='mb-12 mt-24 flex flex-col gap-3'>
         <div className='flex justify-between items-end'>
           <div className='text-2xl font-bold text-start'>Insight Hub</div>
           <div
@@ -102,30 +111,30 @@ export default function DashboardPage() {
           </span>
         </div>
       </div>
-      <div className='mb-12 flex flex-col gap-2'>
+      <div className='mb-12 flex flex-col gap-3'>
         <div className='text-2xl font-bold text-start'>
           Mindful Quest Games 🎮
         </div>
         <div className='flex flex-row gap-4'>
           <GameThumbnail
             title='Be Drug ARware'
-            thumbnailImage={ARIcon}
-            imageClassName='h-[105%] w-[105%]'
+            thumbnailImage={arThumbnail}
+            imageClassName='h-full w-full'
           />
           <GameThumbnail
             title='Find the Symptoms'
-            thumbnailImage={ARIcon}
-            imageClassName='h-[105%] w-[105%]'
+            thumbnailImage={crosswordThumbnail}
+            imageClassName='h-full w-full'
           />
           <GameThumbnail
             title='Quiz Yourself!'
-            thumbnailImage={ARIcon}
-            imageClassName='h-[105%] w-[105%]'
+            thumbnailImage={quizThumbnail}
+            imageClassName='h-full w-full'
           />
           <GameThumbnail
             title='Puzzle'
-            thumbnailImage={ARIcon}
-            imageClassName='h-[105%] w-[105%]'
+            thumbnailImage={puzzleThumbnail}
+            imageClassName='h-full w-full'
           />
         </div>
         <div className='text-center'>
