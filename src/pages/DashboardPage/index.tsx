@@ -3,6 +3,9 @@ import { IoIosArrowForward } from 'react-icons/io';
 import ARIcon from '@/assets/ARIcon@3x.png';
 import newsThumbnail from '@/assets/newsThumbnail@3x.png';
 
+// Constants - utils
+import { useNavigate } from 'react-router-dom';
+
 const InsightThumbnail = ({
   title,
   thumbnailImage,
@@ -50,12 +53,20 @@ const GameThumbnail = ({
 };
 
 export default function DashboardPage() {
+  // Handle navigation
+  const navigate = useNavigate();
+  const handleNavigateToNewsPage = () => {
+    navigate('/news');
+  };
   return (
     <div className='min-h-screen'>
       <div className='mb-12 mt-24 flex flex-col gap-2'>
         <div className='flex justify-between items-end'>
           <div className='text-2xl font-bold text-start'>Insight Hub</div>
-          <div className='flex items-center gap-1'>
+          <div
+            className='flex items-center gap-1'
+            onClick={handleNavigateToNewsPage}
+          >
             <span className='font-medium text-gray-500'>More</span>
             <IoIosArrowForward className='text-sm mt-[0.1rem] text-gray-500' />
           </div>
