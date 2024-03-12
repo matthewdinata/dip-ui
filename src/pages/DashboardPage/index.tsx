@@ -37,8 +37,8 @@ const GameThumbnail = ({
   imageClassName?: string;
 }) => {
   return (
-    <div className='flex flex-col justify-center gap-1'>
-      <div className='rounded-[4.5rem] bg-red-400 h-60 w-60 overflow-hidden'>
+    <div className='flex flex-col justify-center gap-1 text-center'>
+      <div className='rounded-[6rem] bg-red-400 h-60 w-60 overflow-hidden'>
         <img
           className={imageClassName}
           src={thumbnailImage}
@@ -53,8 +53,14 @@ export default function DashboardPage() {
   return (
     <div className='min-h-screen'>
       <div className='mb-12 mt-24 flex flex-col gap-2'>
-        <div className='text-2xl font-bold text-start'>Insight Hub</div>
-        <div className='flex flex-row gap-4 items-center'>
+        <div className='flex justify-between items-end'>
+          <div className='text-2xl font-bold text-start'>Insight Hub</div>
+          <div className='flex items-center gap-1'>
+            <span className='font-medium text-gray-500'>More</span>
+            <IoIosArrowForward className='text-sm mt-[0.1rem] text-gray-500' />
+          </div>
+        </div>
+        <div className='flex flex-row gap-4 items-center bg-black bg-opacity-25 p-8 rounded-2xl'>
           <InsightThumbnail
             title='Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore, optio consequuntur.'
             thumbnailImage={newsThumbnail}
@@ -78,7 +84,7 @@ export default function DashboardPage() {
 
           <IoIosArrowForward className='text-3xl' />
         </div>
-        <div className=''>
+        <div className='text-center'>
           Go back to reading{' '}
           <span className='underline text-red-800 font-medium'>
             Vaping is Harmful
@@ -86,7 +92,9 @@ export default function DashboardPage() {
         </div>
       </div>
       <div className='mb-12 flex flex-col gap-2'>
-        <div className='text-2xl font-bold text-start'>Mindful Quest Games</div>
+        <div className='text-2xl font-bold text-start'>
+          Mindful Quest Games 🎮
+        </div>
         <div className='flex flex-row gap-4'>
           <GameThumbnail
             title='Be Drug ARware'
@@ -109,7 +117,7 @@ export default function DashboardPage() {
             imageClassName='h-[105%] w-[105%]'
           />
         </div>
-        <div className=''>
+        <div className='text-center'>
           You recently played{' '}
           <span className='underline text-red-800 font-medium'>Crossword</span>
         </div>

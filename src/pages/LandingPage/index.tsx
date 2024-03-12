@@ -43,7 +43,7 @@ export default function LandingPage() {
 
   return (
     <>
-      <div className='w-screen'>
+      <div className='w-screen min-h-screen flex items-center justify-center'>
         {user ? (
           <div className='flex flex-col items-center'>
             <div className='mb-24 flex flex-col gap-2 items-center justify-center'>
