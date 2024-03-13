@@ -5,6 +5,8 @@ import { Message } from "./components/Messages"
 import Search, { SearchProps } from "antd/es/input/Search";
 import { useEffect, useRef, useState } from "react";
 import { MessageProps } from "./components/Messages";
+import { postChatBotGenerateStream } from "./api";
+// Todo, change profilePic to user.profile from firebase
 
 // Mock data
 const mockMessages = [
@@ -57,7 +59,13 @@ const mockMessages = [
 // A prototype of chatbotpage
 export const ChatbotPage = () => {
   // Array of messages
-  const [messages, setMessages] = useState<MessageProps[]>(mockMessages);
+  const [messages, setMessages] = useState<MessageProps[]>([]);
+
+  // Streaming Message State
+  const [streamMessage, setStreamMessage] = useState<MessageProps>({
+    profilePic: ChatbotIcon,
+    message: "",
+  });
   // State for input
   const [inputValue, setInputValue] = useState('');
 
@@ -65,46 +73,78 @@ export const ChatbotPage = () => {
   const messageContainerRef = useRef<HTMLDivElement | null>(null);
 
   // handleSearch input
-  const handleSearch: SearchProps['onSearch'] = (value, e) => {
+  const handleSearch: SearchProps['onSearch'] = async (value, e) => {
     e?.preventDefault();
-    // Todo, change profilePic to user.profile from firebase
-    
-    if(inputValue !== ""){
-      // Append to messages, user first
-      setMessages(prevMessages => [...prevMessages,
-        {
-          profilePic: DefaultProfile,
-          message: value
-        }]
-      );
+
+    if (inputValue !== "") {
+      // Temp to store so that input can be cleared
+      const temp = value;
+
       // Clear input
       setInputValue('');
 
+      // Append to messages, user first
+      setMessages(prevMessages => [...prevMessages,
+      {
+        profilePic: DefaultProfile,
+        message: temp
+      }]);
+
       // Todo: Intergration of backend api to here
+      const stream = await postChatBotGenerateStream(temp);
+      let intermediateMessage = '';
+
+      for await (const chunk of stream) {
+        // const cleanChunk = chunk.split("data:")[1].trim();
+        intermediateMessage += chunk;
+        // Render stream message
+        setStreamMessage((prevState) => ({
+          ...prevState,
+          message: prevState.message + chunk
+        }));
+      }
+
+      // After the for-await loop, append the completed streamMessage into messages
+      setMessages(prevMessages => [
+        ...prevMessages,
+        {
+          profilePic: streamMessage.profilePic,
+          message: intermediateMessage
+        }
+      ]);
+
+      // Reset the streamMessage state
+      setStreamMessage(prevState => ({
+        ...prevState,
+        message: ""
+      }));
+
     }
   }
 
   // When messge state is update, the user will be dragged to the bottom of chat.
-  useEffect(() =>{
+  useEffect(() => {
     // Scroll to the bottom
-    messageContainerRef.current?.scrollIntoView({ block: 'end',behavior: 'smooth'});
-  },[messages]);
+    messageContainerRef.current?.scrollIntoView({ block: 'end', behavior: 'smooth' });
+  }, [messages]);
 
   // When the component is mounted, the view of the chat will be at the bottom of the scroll
-  useEffect(() =>{
+  useEffect(() => {
     // Scroll to the bottom
-    messageContainerRef.current?.scrollIntoView({ block: 'end'});
-  },[]);
+    messageContainerRef.current?.scrollIntoView({ block: 'end' });
+  }, [streamMessage]);
 
   return (
     // Todo: Add navbar
-    <div className="relative h-screen max-w-screen overflow-hidden">
+    <div className="relative h-screen w-screen overflow-hidden">
       <div className="flex flex-col gap-9 w-full h-full justify-center items-center overflow-hidden py-8">
         <div className="flex-1 w-full h-full flex justify-center items-center overflow-y-auto px-2">
           <div className="min-w-[330px] w-3/5 h-full">
             <div ref={messageContainerRef} className="w-full flex flex-col gap-7 my-4 flex-1">
               {/* Message compnent will be mapped from state */}
+              <Message profilePic={ChatbotIcon} message={"Hello, what do you want to learn about? Heritage, drugs?"} />
               {messages.map((message, i) => <Message key={i} profilePic={message.profilePic} message={message.message} />)}
+              {streamMessage.message !== "" && <Message profilePic={streamMessage.profilePic} message={streamMessage.message} />}
             </div>
           </div>
         </div>
