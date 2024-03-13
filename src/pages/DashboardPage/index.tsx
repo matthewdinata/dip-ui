@@ -73,7 +73,7 @@ export default function DashboardPage() {
         <div className='flex justify-between items-end'>
           <div className='text-2xl font-bold text-start'>Insight Hub</div>
           <div
-            className='flex items-center gap-1'
+            className='flex items-center gap-1 cursor-pointer'
             onClick={handleNavigateToNewsPage}
           >
             <span className='font-medium text-gray-500'>More</span>
