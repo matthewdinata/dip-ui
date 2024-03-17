@@ -10,7 +10,7 @@ export default function DashboardPage() {
 	const [user] = useAuthState(auth);
 	return (
 		<div className="min-h-screen">
-			<div className="text-2xl md:text-3xl py-6 md:py-8 font-semibold">
+			<div className="text-2xl md:text-3xl pt-4 pb-4 md:pb-6 font-semibold">
 				Welcome back,{" "}
 				<span className="text-red-700">{user?.displayName}</span>!
 			</div>
