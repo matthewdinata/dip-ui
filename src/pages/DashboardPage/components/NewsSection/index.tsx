@@ -83,7 +83,7 @@ export default function NewsSection() {
 	];
 
 	return (
-		<div className="pt-24 flex flex-col gap-3">
+		<div className="flex flex-col gap-3">
 			<div className="flex justify-between items-end">
 				<div className="md:text-2xl text-xl font-bold text-start">
 					Insight Hub
