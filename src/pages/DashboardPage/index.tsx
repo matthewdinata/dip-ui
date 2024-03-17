@@ -1,9 +1,8 @@
+// Components
+import GameSection from "./components/GameSection";
+
 // Assets
 import { IoIosArrowForward } from "react-icons/io";
-import arThumbnail from "@/assets/arThumbnail@3x.png";
-import crosswordThumbnail from "@/assets/crosswordThumbnail@3x.png";
-import puzzleThumbnail from "@/assets/puzzleThumbnail@3x.png";
-import quizThumbnail from "@/assets/quizThumbnail@3x.png";
 import newsThumbnail from "@/assets/newsThumbnail@3x.png";
 
 // Constants - utils
@@ -29,25 +28,6 @@ const InsightThumbnail = ({
 				</div>
 			</div>
 		</a>
-	);
-};
-
-const GameThumbnail = ({
-	title,
-	thumbnailImage,
-	imageClassName,
-}: {
-	title: string;
-	thumbnailImage: string;
-	imageClassName?: string;
-}) => {
-	return (
-		<div className="flex flex-col justify-center gap-1 text-center">
-			<div className="rounded-[6rem] bg-red-400 h-60 w-60 overflow-hidden">
-				<img className={imageClassName} src={thumbnailImage} />
-			</div>
-			<span className="text-lg font-semibold">{title}</span>
-		</div>
 	);
 };
 
@@ -96,49 +76,15 @@ export default function DashboardPage() {
 
 					<IoIosArrowForward className="text-3xl" />
 				</div>
-				<div className="text-center">
+				<div className="text-center md:text-base sm:text-sm text-xs">
 					Go back to reading{" "}
 					<span className="underline text-red-800 font-medium">
 						Vaping is Harmful
 					</span>
 				</div>
 			</div>
-			<div className="mb-12 flex flex-col gap-3">
-				<div className="text-2xl font-bold text-start">
-					Mindful Quest Games 🎮
-				</div>
-				<div className="flex flex-row gap-4">
-					<GameThumbnail
-						title="Be Drug ARware"
-						thumbnailImage={arThumbnail}
-						imageClassName="h-full w-full"
-					/>
-					<GameThumbnail
-						title="Find the Symptoms"
-						thumbnailImage={crosswordThumbnail}
-						imageClassName="h-full w-full"
-					/>
-
-					{/* TODO: fix navigation code practice */}
-					<div onClick={() => navigate("/quiz")}>
-						<GameThumbnail
-							title="Quiz Yourself!"
-							thumbnailImage={quizThumbnail}
-							imageClassName="h-full w-full"
-						/>
-					</div>
-					<GameThumbnail
-						title="Puzzle"
-						thumbnailImage={puzzleThumbnail}
-						imageClassName="h-full w-full"
-					/>
-				</div>
-				<div className="text-center">
-					You recently played{" "}
-					<span className="underline text-red-800 font-medium">
-						Crossword
-					</span>
-				</div>
+			<div>
+				<GameSection />
 			</div>
 		</div>
 	);
