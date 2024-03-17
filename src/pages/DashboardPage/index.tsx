@@ -59,7 +59,7 @@ export default function DashboardPage() {
 	};
 	return (
 		<div className="min-h-screen">
-			<div className="mb-12 mt-24 flex flex-col gap-3">
+			<div className="mb-12 pt-24 flex flex-col gap-3">
 				<div className="flex justify-between items-end">
 					<div className="text-2xl font-bold text-start">
 						Insight Hub

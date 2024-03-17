@@ -13,7 +13,7 @@ import NewsPage from "./pages/NewsPage";
 function App() {
 	return (
 		// I removed the div as i couldnt line up the div properly in mobile view. Uncomment if you really want to use this, i will find a way to realign my divs
-		<div className="md:m-8">
+		<div className="mx-8">
 			<Router>
 				<Routes>
 					<Route path="/" element={<LandingPage />} />
