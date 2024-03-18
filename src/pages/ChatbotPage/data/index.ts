@@ -1,4 +1,4 @@
-import ChatbotIcon from "@/assets/ChatbotIcon.svg"
+import ChatbotIcon from "@/assets/ChatbotIcon.png"
 import DefaultProfile from "@/assets/DefaultProfile.svg";
 
 // Mock data

@@ -9,16 +9,12 @@ import LandingPage from './pages/LandingPage';
 import { ChatbotPage } from './pages/ChatbotPage';
 import QuizPage from './pages/QuizPage';
 import NewsPage from './pages/NewsPage';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-
 // Create a client
-const queryClient = new QueryClient();
 
 function App() {
   return (
     // I removed the div as i couldnt line up the div properly in mobile view. Uncomment if you really want to use this, i will find a way to realign my divs
-    // <div className='m-8'>
-    <QueryClientProvider client={queryClient}>
+    <div className='mx-8'>
       <Router>
         <Routes>
           <Route
@@ -43,8 +39,7 @@ function App() {
           />
         </Routes>
       </Router>
-    </QueryClientProvider>
-    // </div>
+    </div>
   );
 }
 
