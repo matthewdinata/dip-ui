@@ -40,7 +40,7 @@ export default function QuizPage() {
 				<div className="text-5xl font-bold text-center">
 					Quiz Yourself!
 				</div>
-				<div className="flex flex-wrap gap-10 items-center">
+				<div className="flex flex-wrap gap-10 justify-center">
 					<Button
 						title="Drugs"
 						link="https://docs.google.com/forms/d/e/1FAIpQLSfwytZYKTldmYdbptONKEuVoSguHkEqFgjhl99XhITs_CRvOw/viewform"
