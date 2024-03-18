@@ -1,40 +1,9 @@
 // Constants - utils
-import { auth, db, GoogleProvider } from "@/services/firebase";
-import { signInWithPopup } from "firebase/auth";
-import { doc, getDoc, setDoc } from "firebase/firestore";
-import { useAuthState } from "react-firebase-hooks/auth";
+import useAuth from "@/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 
 export default function LandingPage() {
-	const [user] = useAuthState(auth);
-
-	const signInWithGoogle = async () => {
-		try {
-			const res = await signInWithPopup(auth, GoogleProvider);
-			// before making a new doc, check if doc already exists to prevent updating the old doc
-			const docRef = doc(db, "users", res.user.uid);
-			const docSnap = await getDoc(docRef);
-			if (!docSnap.exists()) {
-				await setDoc(doc(db, "users", res.user.uid), {
-					uid: res.user.uid,
-					email: res.user.email,
-					displayName: res.user.displayName,
-					profilePic: res.user.photoURL,
-				});
-			}
-		} catch (error) {
-			console.error("Error signing in with Google: ", error);
-		}
-	};
-
-	const handleLogout = async () => {
-		try {
-			await auth.signOut();
-		} catch (error) {
-			console.error("Error signing out: ", error);
-		}
-	};
-
+	const { user, login, logout } = useAuth();
 	// Handle navigation
 	const navigate = useNavigate();
 	const handleNavigateToDashboardPage = () => {
@@ -73,7 +42,7 @@ export default function LandingPage() {
 								START THE ADVENTURE
 							</button>
 							<button
-								onClick={handleLogout}
+								onClick={logout}
 								className="bg-red-300 bg-opacity-40"
 							>
 								LOG OUT
@@ -86,9 +55,7 @@ export default function LandingPage() {
 							Welcome to our Super App!
 						</div>
 
-						<button onClick={signInWithGoogle}>
-							SIGN IN WITH GOOGLE
-						</button>
+						<button onClick={login}>SIGN IN WITH GOOGLE</button>
 					</div>
 				)}
 			</div>
