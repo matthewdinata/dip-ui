@@ -5,7 +5,7 @@ import { auth } from "@/services/firebase";
 export const postChatBotGenerateStream = async (message: string): Promise<AsyncIterable<string>> => {
   const idToken = await auth.currentUser?.getIdToken();
   // Todo: Change url to deployment url
-  const URL = import.meta.env.VITE_API_KEY + "/chatbot/sse"
+  const URL = import.meta.env.VITE_BACKEND_URL + "chatbot/sse";
   const response = await fetch(URL, {
     method: 'POST',
     body: JSON.stringify({
