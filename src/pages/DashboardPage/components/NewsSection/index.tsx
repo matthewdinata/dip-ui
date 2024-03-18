@@ -24,6 +24,7 @@ const InsightThumbnail = ({
 			href={`https://example.com` + urlPath}
 			target="_blank"
 			rel="noreferrer"
+			className="transition-all hover:scale-105"
 		>
 			<div className="h-40 w-56 rounded-3xl overflow-hidden relative">
 				<div className="bg-blue-200 h-full w-full">

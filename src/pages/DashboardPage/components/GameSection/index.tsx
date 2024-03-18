@@ -21,7 +21,7 @@ const GameThumbnail = ({
 	const navigate = useNavigate();
 	return (
 		<div
-			className="flex flex-col justify-center gap-1 text-center cursor-pointer"
+			className="flex flex-col justify-center gap-2 text-center cursor-pointer transition-all hover:scale-105"
 			onClick={() => navigate(urlPath)}
 		>
 			<div className="md:rounded-[4rem] sm:rounded-[2.5rem] rounded-3xl bg-red-400 overflow-hidden aspect-square">
@@ -63,7 +63,7 @@ export default function GameSection() {
 			<div className="md:text-2xl text-xl font-bold text-start">
 				Mindful Quest Games 🎮
 			</div>
-			<div className="flex flex-row gap-2 md:gap-4 lg:gap-6 xl:gap-8 justify-between items-start">
+			<div className="flex flex-row gap-4 md:gap-6 lg:gap-8 xl:gap-10 justify-between items-start">
 				{games.map((game, idx) => {
 					return (
 						<GameThumbnail
