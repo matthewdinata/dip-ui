@@ -12,22 +12,25 @@ import LandingPage from "./pages/LandingPage";
 import { ChatbotPage } from "./pages/ChatbotPage";
 import QuizPage from "./pages/QuizPage";
 import NewsPage from "./pages/NewsPage";
+import { ToastProvider } from "./context/ToastContext";
 
 function App() {
 	return (
 		<div>
-			<Router>
-				<Navbar />
-				<div className="mx-8">
-					<Routes>
-						<Route path="/" element={<LandingPage />} />
-						<Route path="/dashboard" element={<DashboardPage />} />
-						<Route path="/chatbot" element={<ChatbotPage />} />
-						<Route path="/quiz" element={<QuizPage />} />
-						<Route path="/news" element={<NewsPage />} />
-					</Routes>
-				</div>
-			</Router>
+			<ToastProvider>
+				<Router>
+					<Navbar />
+					<div className="mx-8">
+						<Routes>
+							<Route path="/" element={<LandingPage />} />
+							<Route path="/dashboard" element={<DashboardPage />} />
+							<Route path="/chatbot" element={<ChatbotPage />} />
+							<Route path="/quiz" element={<QuizPage />} />
+							<Route path="/news" element={<NewsPage />} />
+						</Routes>
+					</div>
+				</Router>
+			</ToastProvider>
 		</div>
 	);
 }

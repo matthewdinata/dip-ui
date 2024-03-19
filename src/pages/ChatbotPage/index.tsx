@@ -6,14 +6,14 @@ import Search, { SearchProps } from "antd/es/input/Search";
 import { useEffect, useRef, useState } from "react";
 import { MessageProps } from "./components/Messages";
 import { postChatBotGenerateStream } from "./api";
-import { notification } from "antd";
-// import { mockMessages } from "./data";
-// Todo, change profilePic to user.profile from firebase
+import { useToast } from "@/hooks/useToast";
 
-// A prototype of chatbotpage
 export const ChatbotPage = () => {
+	// Todo, change profilePic to user.profile from firebase
+
 	// Antd Notification
-	const [api, contextHolder] = notification.useNotification();
+	// const [api, contextHolder] = notification.useNotification();
+	const { ToastCreate } = useToast();
 
 	// Array of messages
 	const [messages, setMessages] = useState<MessageProps[]>([]);
@@ -49,7 +49,6 @@ export const ChatbotPage = () => {
 				},
 			]);
 
-			// Todo: Intergration of backend api to here
 			try {
 				const stream = await postChatBotGenerateStream(temp);
 				let intermediateMessage = "";
@@ -77,19 +76,27 @@ export const ChatbotPage = () => {
 					...prevState,
 					message: "",
 				}));
-			} catch (err) {
-				/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access */
+			} 
+			/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access */
+			catch (err) {
 
 				const error = err as { message: string };
 				const errorMessageObject = JSON.parse(error.message);
-				api.error({
+				// api.error({
+				// 	message: "Status " + errorMessageObject.status,
+				// 	description: errorMessageObject.message,
+				// });
+				ToastCreate({
 					message: "Status " + errorMessageObject.status,
 					description: errorMessageObject.message,
+					placement: "topRight",
+					toastType: "error",
 				});
 			}
 			/* eslint-enable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access */
 		}
 	};
+
 
 	// When messge state is update, the user will be dragged to the bottom of chat.
 	useEffect(() => {
@@ -116,8 +123,8 @@ export const ChatbotPage = () => {
 
 	return (
 		// Todo: Add navbar
-		<div className="relative h-screen overflow-hidden">
-			{contextHolder}
+		<div className="relative h-[calc(100vh-3rem)] overflow-hidden">
+			{/* {contextHolder} */}
 			<div className="flex flex-col gap-9 w-full h-full justify-center items-center overflow-hidden py-8">
 				<div className="flex-1 w-full h-full flex justify-center items-center overflow-y-auto px-1 scrollbar-hide">
 					<div className="min-w-[300px] w-3/5 h-full ">
