@@ -49,7 +49,7 @@ export default function QuizPage() {
 						Quiz Yourself!
 					</div>
 				</div>
-				<div className="flex flex-wrap gap-10 items-center">
+				<div className="flex flex-wrap gap-10 justify-center">
 					<Button
 						title="Drugs"
 						link="https://docs.google.com/forms/d/e/1FAIpQLSfwytZYKTldmYdbptONKEuVoSguHkEqFgjhl99XhITs_CRvOw/viewform"
