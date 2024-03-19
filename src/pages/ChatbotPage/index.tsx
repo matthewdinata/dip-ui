@@ -106,14 +106,6 @@ export const ChatbotPage = () => {
 			behavior: "smooth",
 		});
 	}, [messages]);
-	// When messge state is update, the user will be dragged to the bottom of chat.
-	useEffect(() => {
-		// Scroll to the bottom
-		messageContainerRef.current?.scrollIntoView({
-			block: "end",
-			behavior: "smooth",
-		});
-	}, [messages]);
 
 	// When the component is mounted, the view of the chat will be at the bottom of the scroll
 	useEffect(() => {
