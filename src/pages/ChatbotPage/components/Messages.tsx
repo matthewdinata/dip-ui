@@ -1,6 +1,6 @@
-export interface MessageProps{
-    profilePic: string;
-    message: string;
+export interface MessageProps {
+	profilePic: string;
+	message: string;
 }
 
 export const Message = ({profilePic, message}: MessageProps) => {

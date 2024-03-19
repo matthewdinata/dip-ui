@@ -79,6 +79,7 @@ export const ChatbotPage = () => {
 				}));
 			} catch (err) {
 				/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access */
+
 				const error = err as { message: string };
 				const errorMessageObject = JSON.parse(error.message);
 				api.error({
@@ -90,6 +91,14 @@ export const ChatbotPage = () => {
 		}
 	};
 
+	// When messge state is update, the user will be dragged to the bottom of chat.
+	useEffect(() => {
+		// Scroll to the bottom
+		messageContainerRef.current?.scrollIntoView({
+			block: "end",
+			behavior: "smooth",
+		});
+	}, [messages]);
 	// When messge state is update, the user will be dragged to the bottom of chat.
 	useEffect(() => {
 		// Scroll to the bottom
