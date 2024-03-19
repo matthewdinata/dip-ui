@@ -16,9 +16,9 @@ import NewsPage from "./pages/NewsPage";
 function App() {
 	return (
 		<div>
-			<Navbar />
-			<div className="mx-8">
-				<Router>
+			<Router>
+				<Navbar />
+				<div className="mx-8">
 					<Routes>
 						<Route path="/" element={<LandingPage />} />
 						<Route path="/dashboard" element={<DashboardPage />} />
@@ -26,8 +26,8 @@ function App() {
 						<Route path="/quiz" element={<QuizPage />} />
 						<Route path="/news" element={<NewsPage />} />
 					</Routes>
-				</Router>
-			</div>
+				</div>
+			</Router>
 		</div>
 	);
 }

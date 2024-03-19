@@ -1,14 +1,31 @@
+// Components
+import { IoChevronBackOutline } from "react-icons/io5";
+
 // Assets
 import appLogo from "@/assets/appLogo@3x.png";
 
 // Constants - utils
 import useAuth from "@/hooks/useAuth";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function Navbar() {
 	const { user, login, logout } = useAuth();
+	const navigate = useNavigate();
+	const location = useLocation();
+	const { pathname } = location;
 	return (
 		<div className="w-full h-12 bg-white drop-shadow-md grid grid-cols-3 gap-x-4 items-center px-4">
-			<div className="" />
+			{pathname === "/dashboard" ? (
+				<></>
+			) : (
+				<div
+					className="flex items-center cursor-pointer hover:text-red-900 hover:text-lg hover:scale-105 transition-all ml-1"
+					onClick={() => navigate(-1)}
+				>
+					<IoChevronBackOutline className="text-xl" />
+				</div>
+			)}
+
 			<img
 				src={appLogo}
 				className="w-10 h-10 aspect-square text-center justify-self-center col-start-2"

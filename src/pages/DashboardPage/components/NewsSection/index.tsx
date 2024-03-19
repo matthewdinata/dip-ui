@@ -51,6 +51,36 @@ export default function NewsSection() {
 			thumbnailImage: newsThumbnail,
 			urlPath: "/news",
 		},
+		// {
+		// 	title: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore, optio consequuntur.",
+		// 	thumbnailImage: newsThumbnail,
+		// 	urlPath: "/news",
+		// },
+		// {
+		// 	title: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore, optio consequuntur.",
+		// 	thumbnailImage: newsThumbnail,
+		// 	urlPath: "/news",
+		// },
+		// {
+		// 	title: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore, optio consequuntur.",
+		// 	thumbnailImage: newsThumbnail,
+		// 	urlPath: "/news",
+		// },
+		// {
+		// 	title: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore, optio consequuntur.",
+		// 	thumbnailImage: newsThumbnail,
+		// 	urlPath: "/news",
+		// },
+		// {
+		// 	title: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore, optio consequuntur.",
+		// 	thumbnailImage: newsThumbnail,
+		// 	urlPath: "/news",
+		// },
+		// {
+		// 	title: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore, optio consequuntur.",
+		// 	thumbnailImage: newsThumbnail,
+		// 	urlPath: "/news",
+		// },
 	];
 
 	return (
