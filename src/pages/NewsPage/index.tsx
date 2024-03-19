@@ -1,7 +1,11 @@
-//Assets
 import React from "react";
+
+// Assets
 import { IoIosArrowBack } from "react-icons/io";
 import newsThumbnail from "@/assets/newsThumbnail@3x.png";
+
+// Constants - utils
+import { useNavigate } from "react-router-dom";
 
 const Button = ({
 	title,
@@ -57,11 +61,22 @@ const NewsItem: React.FC<NewsItemProps> = ({ thumbnail, title, newsLink }) => {
 };
 
 export default function NewsPage() {
+	const navigate = useNavigate();
+	const handleNavigateToDashboardPage = () => {
+		navigate("/dashboard");
+	};
 	return (
 		<div className="min-h-screen">
 			<div className="mb-12 mt-24 flex flex-col gap-4">
-				<IoIosArrowBack className="text-3xl" />
-				<header className="text-3xl font-bold text-center">News</header>
+				<div className="flex justify-center relative">
+					<IoIosArrowBack
+						className="text-3xl absolute left-0"
+						onClick={handleNavigateToDashboardPage}
+					/>
+					<header className="text-3xl font-bold text-center">
+						News
+					</header>
+				</div>
 				<div className="flex flex-row gap-10 items-center justify-center">
 					<Button title="Drugs" imageClassName="h-[105%] w-[105%]" />
 					<Button

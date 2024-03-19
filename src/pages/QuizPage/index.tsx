@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
 
 const Button = ({
@@ -33,12 +33,21 @@ const Button = ({
 };
 
 export default function QuizPage() {
+	const navigate = useNavigate();
+	const handleNavigateToDashboardPage = () => {
+		navigate("/dashboard");
+	};
 	return (
 		<div className="min-h-screen">
-			<div className="mb-12 mt-24 flex flex-col gap-16">
-				<IoIosArrowBack className="text-2xl" />
-				<div className="text-5xl font-bold text-center">
-					Quiz Yourself!
+			<div className="mb-12 mt-24 flex flex-col gap-16 relative">
+				<div className="flex justify-center">
+					<IoIosArrowBack
+						className="text-2xl absolute left-0"
+						onClick={handleNavigateToDashboardPage}
+					/>
+					<div className="text-5xl font-bold text-center">
+						Quiz Yourself!
+					</div>
 				</div>
 				<div className="flex flex-wrap gap-10 justify-center">
 					<Button
