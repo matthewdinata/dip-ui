@@ -5,12 +5,14 @@ import NewsSection from "./components/NewsSection";
 // Constants - utils
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "@/services/firebase";
+import { useNavigate } from "react-router-dom";
 
 // Assets
 import chatbotMascot from "@/assets/chatbotMascot@3x.png";
 
 export default function DashboardPage() {
 	const [user] = useAuthState(auth);
+	const navigate = useNavigate();
 	return (
 		<div className="min-h-screen">
 			<div className="text-2xl md:text-3xl pt-4 pb-4 md:pb-6 font-semibold">
@@ -39,7 +41,10 @@ export default function DashboardPage() {
 								our chatbot!
 							</span>
 						</div>
-						<div className="bg-red-700 text-white font-semibold text-lg text-center py-1 px-2 rounded-lg mx-3 sm:mx-4">
+						<div
+							className="bg-red-700 text-white font-semibold text-lg text-center py-1 px-2 rounded-lg mx-3 sm:mx-4 cursor-pointer hover:bg-red-600 transition-all"
+							onClick={() => navigate("/chatbot")}
+						>
 							Chat now
 						</div>
 					</div>
