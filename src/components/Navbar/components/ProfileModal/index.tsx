@@ -1,5 +1,6 @@
 // Components
 import { ConfigProvider, Modal } from "antd";
+import AvatarModal from "./AvatarModal";
 
 // Assets
 import avatar1 from "@/assets/avatar1@3x.png";
@@ -8,10 +9,10 @@ import avatar1 from "@/assets/avatar1@3x.png";
 import useAuth from "@/hooks/useAuth";
 import { getUserAvatar } from "@/utils/userUtils";
 import { useEffect, useState } from "react";
+import { useToast } from "@/hooks/useToast";
 
 // Constants - types
 import { UserInfoType } from "@/types/userTypes";
-import AvatarModal from "./AvatarModal";
 
 export default function ProfileModal({
 	isModalOpen,
@@ -21,6 +22,7 @@ export default function ProfileModal({
 	setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
 	const { userInfo, logout, updateUserData } = useAuth();
+	const { ToastCreate } = useToast();
 
 	const [school, setSchool] = useState<string>("");
 	const [grade, setGrade] = useState<string>("");
@@ -42,6 +44,12 @@ export default function ProfileModal({
 		});
 		setIsLoading(false);
 		setIsModalOpen(false);
+		ToastCreate({
+			message: "Success!",
+			description: "Your account has been edited",
+			placement: "topRight",
+			toastType: "success",
+		});
 	};
 
 	const handleLogout = async () => {
@@ -65,7 +73,7 @@ export default function ProfileModal({
 				width={960}
 				footer={null}
 			>
-				<div className="flex flex-col items-center gap-8 my-2">
+				<div className="flex flex-col items-center gap-6 sm:gap-8 my-2">
 					<div className="text-xl sm:text-2xl font-semibold">
 						Profile
 					</div>
@@ -114,10 +122,13 @@ export default function ProfileModal({
 									onChange={(e) => setGrade(e.target.value)}
 								/>
 							</div>
+							<div className="text-red-500 text-xs sm:text-sm sm:mt-2">
+								*All fields are compulsory.
+							</div>
 							<button
-								className="bg-red-700 text-white font-semibold md:text-lg text-center py-1 px-6 rounded-lg mt-2 cursor-pointer hover:bg-red-600 transition-all place-self-end hover:ring-transparent hover:border-transparent focus:ring-transparent focus:border-transparent focus:outline-none"
+								className="bg-red-700 text-white font-semibold md:text-lg text-center py-1 px-6 rounded-lg mt-2 cursor-pointer hover:bg-red-600 transition-all place-self-end hover:ring-transparent hover:border-transparent focus:ring-transparent focus:border-transparent focus:outline-none disabled:cursor-not-allowed disabled:bg-gray-400"
 								onClick={handleSave}
-								disabled={isLoading}
+								disabled={isLoading || !grade || !school}
 							>
 								Save
 							</button>

@@ -1,7 +1,10 @@
 // Utils
 import useAuth from "@/hooks/useAuth";
-import { ConfigProvider, Modal } from "antd";
 import React, { useEffect, useState } from "react";
+import { useToast } from "@/hooks/useToast";
+
+// Components
+import { ConfigProvider, Modal } from "antd";
 
 // Assets
 import avatar1 from "@/assets/avatar1@3x.png";
@@ -21,8 +24,9 @@ export default function AvatarModal({
 	setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
 	const [selectedId, setSelectedId] = useState<number>(1);
-	const { userInfo, updateUserData } = useAuth();
 	const [isLoading, setIsLoading] = useState<boolean>(false);
+	const { userInfo, updateUserData } = useAuth();
+	const { ToastCreate } = useToast();
 
 	const handleSave = async () => {
 		setIsLoading(true);
@@ -37,6 +41,13 @@ export default function AvatarModal({
 				window.location.reload();
 			}, 500);
 		}
+
+		ToastCreate({
+			message: "Success!",
+			description: "Your account has been edited",
+			placement: "topRight",
+			toastType: "success",
+		});
 	};
 
 	useEffect(() => {
@@ -59,7 +70,6 @@ export default function AvatarModal({
 		{ id: 7, imageSrc: avatar7 },
 		{ id: 8, imageSrc: avatar8 },
 	];
-	console.log(selectedId);
 
 	return (
 		<ConfigProvider
