@@ -1,7 +1,7 @@
 // Assets
 import chatbotMascot from "@/assets/chatbotMascot@3x.png";
 
-// Constants - utils
+// Utils
 import { useNavigate } from "react-router-dom";
 
 export default function ChatbotSection() {

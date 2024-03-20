@@ -4,7 +4,7 @@ import crosswordThumbnail from "@/assets/crosswordThumbnail@3x.png";
 import puzzleThumbnail from "@/assets/puzzleThumbnail@3x.png";
 import quizThumbnail from "@/assets/quizThumbnail@3x.png";
 
-// Constants - utils
+// Utils
 import { useNavigate } from "react-router-dom";
 
 const GameThumbnail = ({

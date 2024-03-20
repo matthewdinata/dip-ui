@@ -1,7 +1,7 @@
 // Components
 import { IoIosArrowForward } from "react-icons/io";
 
-// Constants - utils
+// Utils
 import { useNavigate } from "react-router-dom";
 
 // Assets
