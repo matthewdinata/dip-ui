@@ -1,5 +1,5 @@
 import ChatbotIcon from "@/assets/ChatbotIcon.png";
-import { FaCircleChevronRight } from "react-icons/fa6";
+import { FaCircleChevronRight, FaChevronDown } from "react-icons/fa6";
 import { Message } from "./components/Messages";
 import Search, { SearchProps } from "antd/es/input/Search";
 import { useEffect, useRef, useState } from "react";
@@ -11,7 +11,7 @@ import useAuth from "@/hooks/useAuth";
 export const ChatbotPage = () => {
 	// Todo, change profilePic to user.profile from firebase
 	const { user } = useAuth();
-	
+
 	// Antd Notification Hook
 	const { ToastCreate } = useToast();
 
@@ -23,11 +23,39 @@ export const ChatbotPage = () => {
 		profilePic: ChatbotIcon,
 		message: "",
 	});
+
 	// State for input
 	const [inputValue, setInputValue] = useState("");
 
+	// state for checking if user scrolled up from latest message
+
+	const [isBottom, setIsBottom] = useState<boolean>(true);
+
 	// ref for messageContainerDiv
 	const messageContainerRef = useRef<HTMLDivElement | null>(null);
+
+	// ref for scrollDiv
+	const scrollBarContainerRef = useRef<HTMLDivElement | null>(null);
+
+	// function to set state when user is not at the bottom
+	const handleScroll = () => {
+		if (scrollBarContainerRef.current) {
+			// Destruct relevants metrics
+			const { scrollHeight, scrollTop, clientHeight } =
+				scrollBarContainerRef.current;
+			// Formula whether user is bottom of the scrollbar div
+			// console.log("ScrollHeight - scrollTop: " + (scrollHeight-scrollTop).toString())
+			// console.log(clientHeight);
+			setIsBottom(
+				Math.round(scrollHeight - scrollTop - 40.66) <= clientHeight
+			);
+		}
+	};
+
+	const handleClick = (e:React.MouseEvent<HTMLElement>) =>{
+		e.preventDefault();
+		messageContainerRef.current?.scrollIntoView({ block: "end" });
+	}
 
 	// handleSearch input
 	const handleSearch: SearchProps["onSearch"] = async (value, e) => {
@@ -41,7 +69,7 @@ export const ChatbotPage = () => {
 			setInputValue("");
 
 			// Append to messages, user first
-			if(user?.photoURL){
+			if (user?.photoURL) {
 				setMessages((prevMessages) => [
 					...prevMessages,
 					{
@@ -78,10 +106,8 @@ export const ChatbotPage = () => {
 					...prevState,
 					message: "",
 				}));
-			} 
-			/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access */
-			catch (err) {
-
+			} catch (err) {
+				/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access */
 				const error = err as { message: string };
 				const errorMessageObject = JSON.parse(error.message);
 				ToastCreate({
@@ -114,11 +140,16 @@ export const ChatbotPage = () => {
 		// Todo: Add navbar
 		<div className="relative h-[calc(100vh-3rem)] overflow-hidden">
 			<div className="flex flex-col gap-9 w-full h-full justify-center items-center overflow-hidden py-8">
-				<div className="flex-1 w-full h-full flex justify-center items-center overflow-y-auto px-1 scrollbar-hide">
-					<div className="min-w-[300px] w-3/5 h-full ">
+				<div
+					className="flex-1 w-full h-full flex justify-center items-center overflow-y-auto px-1 "
+					onScroll={handleScroll}
+					ref={scrollBarContainerRef}
+				>
+					<div className="min-w-[300px] w-3/5 h-full">
 						<div
 							ref={messageContainerRef}
 							className="w-full flex flex-col gap-7 my-4 flex-1"
+							onScroll={handleScroll}
 						>
 							{/* Message compnent will be mapped from state */}
 							<Message
@@ -142,6 +173,16 @@ export const ChatbotPage = () => {
 							)}
 						</div>
 					</div>
+					{!isBottom && (
+						<button
+							className={`absolute duration-100 z-50 rounded-full flex items-center justify-center w-10 h-10 bottom-24`}
+							onClick={handleClick}
+						>
+							<div className="flex-grow">
+								<FaChevronDown />
+							</div>
+						</button>
+					)}
 				</div>
 				{/* Use antdesign component */}
 				<div className="w-full flex justify-center gap-1">
