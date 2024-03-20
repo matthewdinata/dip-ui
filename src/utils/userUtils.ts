@@ -10,7 +10,6 @@ import avatar5 from "@/assets/avatar5@3x.png";
 import avatar6 from "@/assets/avatar6@3x.png";
 import avatar7 from "@/assets/avatar7@3x.png";
 import avatar8 from "@/assets/avatar8@3x.png";
-import avatar9 from "@/assets/avatar9@3x.png";
 
 export const getUserAvatar = (userInfo: userInfoType) => {
 	const avatars = [
@@ -22,7 +21,6 @@ export const getUserAvatar = (userInfo: userInfoType) => {
 		avatar6,
 		avatar7,
 		avatar8,
-		avatar9,
 	];
 	const avatarIndex = userInfo.avatarId - 1;
 	return avatarIndex >= 0 && avatarIndex < avatars.length

@@ -1,5 +1,6 @@
 // Components
 import { IoChevronBackOutline } from "react-icons/io5";
+import ProfileModal from "./components/ProfileModal";
 
 // Assets
 import appLogo from "@/assets/appLogo@3x.png";
@@ -12,13 +13,14 @@ import { userInfoType } from "@/types/userTypes";
 import useAuth from "@/hooks/useAuth";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getUserAvatar } from "@/utils/userUtils";
+import { useState } from "react";
 
 export default function Navbar() {
 	const { user, userInfo, login, logout } = useAuth();
 	const navigate = useNavigate();
 	const location = useLocation();
 	const { pathname } = location;
-	console.log(userInfo);
+	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
 	return (
 		<div className="w-full h-12 bg-white drop-shadow-md grid grid-cols-3 gap-x-4 items-center px-4">
@@ -40,7 +42,15 @@ export default function Navbar() {
 			<div className="justify-self-end col-start-3">
 				{user ? (
 					<div className="flex h-8 items-center gap-2">
-						<div className="rounded-full w-7 h-7 aspect-square bg-red-500 overflow-hidden">
+						<ProfileModal
+							isModalOpen={isModalOpen}
+							setIsModalOpen={setIsModalOpen}
+						/>
+
+						<div
+							className="rounded-full w-7 h-7 aspect-square bg-red-500 overflow-hidden hover:scale-105 transition-all cursor-pointer"
+							onClick={() => setIsModalOpen(true)}
+						>
 							<img
 								src={
 									userInfo
