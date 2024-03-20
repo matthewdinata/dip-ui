@@ -7,7 +7,7 @@ import appLogo from "@/assets/appLogo@3x.png";
 import avatar1 from "@/assets/avatar1@3x.png";
 
 // Constants - types
-import { userInfoType } from "@/types/userTypes";
+import { UserInfoType } from "@/types/userTypes";
 
 // Utils
 import useAuth from "@/hooks/useAuth";
@@ -55,7 +55,7 @@ export default function Navbar() {
 								src={
 									userInfo
 										? getUserAvatar(
-												userInfo as userInfoType
+												userInfo as UserInfoType
 											)
 										: avatar1
 								}

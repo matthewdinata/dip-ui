@@ -1,5 +1,5 @@
 // Constants - types
-import { userInfoType } from "@/types/userTypes";
+import { UserInfoType } from "@/types/userTypes";
 
 // Assets
 import avatar1 from "@/assets/avatar1@3x.png";
@@ -11,7 +11,7 @@ import avatar6 from "@/assets/avatar6@3x.png";
 import avatar7 from "@/assets/avatar7@3x.png";
 import avatar8 from "@/assets/avatar8@3x.png";
 
-export const getUserAvatar = (userInfo: userInfoType) => {
+export const getUserAvatar = (userInfo: UserInfoType) => {
 	const avatars = [
 		avatar1,
 		avatar2,

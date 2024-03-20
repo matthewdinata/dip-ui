@@ -1,4 +1,4 @@
-export type userInfoType = {
+export type UserInfoType = {
 	avatarId: number;
 	displayName: string;
 	email: string;
