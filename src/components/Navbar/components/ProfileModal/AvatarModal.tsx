@@ -44,7 +44,7 @@ export default function AvatarModal({
 
 		ToastCreate({
 			message: "Success!",
-			description: "Your account has been edited",
+			description: "Your account has been edited.",
 			placement: "topRight",
 			toastType: "success",
 		});
