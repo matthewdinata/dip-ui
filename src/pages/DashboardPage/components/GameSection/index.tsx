@@ -4,7 +4,7 @@ import crosswordThumbnail from "@/assets/crosswordThumbnail@3x.png";
 import puzzleThumbnail from "@/assets/puzzleThumbnail@3x.png";
 import quizThumbnail from "@/assets/quizThumbnail@3x.png";
 
-// Constants - utils
+// Utils
 import { useNavigate } from "react-router-dom";
 
 const GameThumbnail = ({
@@ -78,7 +78,7 @@ export default function GameSection() {
 			</div>
 			<div className="text-center md:text-base sm:text-sm text-xs">
 				You recently played{" "}
-				<span className="underline text-red-800 font-medium ">
+				<span className="underline text-red-800 font-medium cursor-pointer">
 					Crossword
 				</span>
 			</div>

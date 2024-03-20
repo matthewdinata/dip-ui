@@ -1,18 +1,27 @@
 // Components
 import { IoChevronBackOutline } from "react-icons/io5";
+import ProfileModal from "./components/ProfileModal";
 
 // Assets
 import appLogo from "@/assets/appLogo@3x.png";
+import avatar1 from "@/assets/avatar1@3x.png";
 
-// Constants - utils
+// Constants - types
+import { UserInfoType } from "@/types/userTypes";
+
+// Utils
 import useAuth from "@/hooks/useAuth";
 import { useLocation, useNavigate } from "react-router-dom";
+import { getUserAvatar } from "@/utils/userUtils";
+import { useState } from "react";
 
 export default function Navbar() {
-	const { user, login, logout } = useAuth();
+	const { user, userInfo, login, logout } = useAuth();
 	const navigate = useNavigate();
 	const location = useLocation();
 	const { pathname } = location;
+	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
 	return (
 		<div className="w-full h-12 bg-white drop-shadow-md grid grid-cols-3 gap-x-4 items-center px-4">
 			{pathname === "/dashboard" ? (
@@ -33,7 +42,26 @@ export default function Navbar() {
 			<div className="justify-self-end col-start-3">
 				{user ? (
 					<div className="flex h-8 items-center gap-2">
-						<div className="rounded-full w-7 h-7 aspect-square bg-red-500"></div>
+						<ProfileModal
+							isModalOpen={isModalOpen}
+							setIsModalOpen={setIsModalOpen}
+						/>
+
+						<div
+							className="rounded-full w-7 h-7 aspect-square bg-red-500 overflow-hidden hover:scale-105 transition-all cursor-pointer"
+							onClick={() => setIsModalOpen(true)}
+						>
+							<img
+								src={
+									userInfo
+										? getUserAvatar(
+												userInfo as UserInfoType
+											)
+										: avatar1
+								}
+								className="w-full h-full"
+							/>
+						</div>
 						<div
 							className="bg-red-100 hover:bg-red-200 transition-all text-black text-xs md:text-sm font-medium py-1 px-2 sm:px-5 rounded-xl cursor-pointer"
 							onClick={logout}

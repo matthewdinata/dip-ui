@@ -3,7 +3,7 @@ import GameSection from "./components/GameSection";
 import NewsSection from "./components/NewsSection";
 import ChatbotSection from "./components/ChatbotSection";
 
-// Constants - utils
+// Utils
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "@/services/firebase";
 
