@@ -1,6 +1,12 @@
 import { auth, db, GoogleProvider } from "@/services/firebase";
 import { signInWithPopup } from "firebase/auth";
-import { doc, DocumentData, getDoc, setDoc } from "firebase/firestore";
+import {
+	doc,
+	DocumentData,
+	getDoc,
+	setDoc,
+	updateDoc,
+} from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 
@@ -60,5 +66,16 @@ export default function useAuth() {
 		fetchUserData().catch(console.error);
 	}, [user]);
 
-	return { user, userInfo, login, logout };
+	const updateUserData = async (obj: object) => {
+		try {
+			if (user) {
+				const docRef = doc(db, "users", user.uid);
+				await updateDoc(docRef, obj);
+			}
+		} catch (err) {
+			console.error("Failed to update user data.");
+		}
+	};
+
+	return { user, userInfo, login, logout, updateUserData };
 }

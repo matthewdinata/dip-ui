@@ -7,7 +7,7 @@ import avatar1 from "@/assets/avatar1@3x.png";
 // Utils
 import useAuth from "@/hooks/useAuth";
 import { getUserAvatar } from "@/utils/userUtils";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // Constants - types
 import { UserInfoType } from "@/types/userTypes";
@@ -19,10 +19,33 @@ export default function ProfileModal({
 	isModalOpen: boolean;
 	setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
-	const { userInfo, logout } = useAuth();
+	const { userInfo, logout, updateUserData } = useAuth();
 
 	const [school, setSchool] = useState<string>("");
 	const [grade, setGrade] = useState<string>("");
+	const [isLoading, setIsLoading] = useState<boolean>(false);
+
+	useEffect(() => {
+		if (userInfo) {
+			setSchool(userInfo.school as string);
+			setGrade(userInfo.grade as string);
+		}
+	}, [userInfo]);
+
+	const handleSave = async () => {
+		setIsLoading(true);
+		await updateUserData({
+			school,
+			grade,
+		});
+		setIsLoading(false);
+		setIsModalOpen(false);
+	};
+
+	const handleLogout = async () => {
+		await logout();
+		setIsModalOpen(false);
+	};
 
 	return (
 		<ConfigProvider
@@ -80,12 +103,13 @@ export default function ProfileModal({
 									onChange={(e) => setGrade(e.target.value)}
 								/>
 							</div>
-							<div
-								className="bg-red-700 text-white font-semibold text-lg text-center py-1 px-6 rounded-lg mt-2 cursor-pointer hover:bg-red-600 transition-all place-self-end"
-								onClick={logout}
+							<button
+								className="bg-red-700 text-white font-semibold text-lg text-center py-1 px-6 rounded-lg mt-2 cursor-pointer hover:bg-red-600 transition-all place-self-end hover:ring-transparent hover:border-transparent focus:ring-transparent focus:border-transparent focus:outline-none"
+								onClick={handleSave}
+								disabled={isLoading}
 							>
 								Save
-							</div>
+							</button>
 						</div>
 						<div className="flex flex-1 flex-col gap-2">
 							<div className="text-lg font-medium">Email</div>
@@ -102,7 +126,7 @@ export default function ProfileModal({
 					</div>
 					<div
 						className="bg-red-700 text-white font-semibold text-lg text-center py-1 px-6 rounded-lg mx-3 mt-16 sm:mx-4 mb-2 cursor-pointer hover:bg-red-600 transition-all"
-						onClick={logout}
+						onClick={handleLogout}
 					>
 						Logout
 					</div>
