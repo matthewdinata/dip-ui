@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 
 // Constants - types
 import { UserInfoType } from "@/types/userTypes";
+import AvatarModal from "./AvatarModal";
 
 export default function ProfileModal({
 	isModalOpen,
@@ -24,6 +25,7 @@ export default function ProfileModal({
 	const [school, setSchool] = useState<string>("");
 	const [grade, setGrade] = useState<string>("");
 	const [isLoading, setIsLoading] = useState<boolean>(false);
+	const [isAvatarModalOpen, setIsAvatarModalOpen] = useState<boolean>(false);
 
 	useEffect(() => {
 		if (userInfo) {
@@ -66,6 +68,10 @@ export default function ProfileModal({
 				<div className="flex flex-col items-center gap-8 my-2">
 					<div className="text-2xl font-semibold">Profile</div>
 					<div className="flex flex-col items-center gap-1">
+						<AvatarModal
+							isModalOpen={isAvatarModalOpen}
+							setIsModalOpen={setIsAvatarModalOpen}
+						/>
 						<img
 							src={
 								userInfo
@@ -74,7 +80,10 @@ export default function ProfileModal({
 							}
 							className="w-16 h-16 rounded-full"
 						/>
-						<div className="underline cursor-pointer">
+						<div
+							className="underline cursor-pointer"
+							onClick={() => setIsAvatarModalOpen(true)}
+						>
 							Change Avatar
 						</div>
 					</div>
