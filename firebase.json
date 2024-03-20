@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "matthewdinata/dip-ui",
+    "public": "dist",
     "ignore": [
       "firebase.json",
       "**/.*",
