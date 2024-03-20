@@ -1,7 +1,7 @@
 // Utils
 import useAuth from "@/hooks/useAuth";
 import { ConfigProvider, Modal } from "antd";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 // Assets
 import avatar1 from "@/assets/avatar1@3x.png";
@@ -22,7 +22,6 @@ export default function AvatarModal({
 }) {
 	const [selectedId, setSelectedId] = useState<number>(1);
 	const { userInfo, updateUserData } = useAuth();
-
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 
 	const handleSave = async () => {
@@ -34,7 +33,9 @@ export default function AvatarModal({
 		setIsModalOpen(false);
 
 		if (selectedId !== userInfo?.avatarId) {
-			window.location.reload();
+			setTimeout(() => {
+				window.location.reload();
+			}, 500);
 		}
 	};
 
@@ -77,7 +78,7 @@ export default function AvatarModal({
 				footer={null}
 			>
 				<div className="flex flex-col gap-4">
-					<span className="text-red-700 font-bold text-2xl">
+					<span className="text-red-700 font-bold text-xl sm:text-2xl">
 						Change your avatar!
 					</span>
 					<div className="mt-2 grid grid-cols-4 gap-2">
@@ -85,7 +86,7 @@ export default function AvatarModal({
 							<label
 								key={option.id}
 								className={
-									"cursor-pointer overflow-hidden aspect-square p-1"
+									"cursor-pointer overflow-hidden aspect-square p-1 hover:scale-95 transition-all"
 								}
 							>
 								<input
@@ -106,7 +107,7 @@ export default function AvatarModal({
 										"w-full h-full rounded-full object-cover" +
 										`${
 											selectedId === option.id
-												? "!border scale-95 transition-all shadow-[0_0_10px] shadow-yellow-200"
+												? "!border scale-95 transition-all shadow-[0_0_0px_3px] shadow-red-600"
 												: "border-transparent"
 										}`
 									}
@@ -115,7 +116,7 @@ export default function AvatarModal({
 						))}
 					</div>
 					<button
-						className="bg-red-700 text-white font-semibold text-lg text-center py-1 px-6 rounded-lg mt-2 cursor-pointer hover:bg-red-600 transition-all place-self-end hover:ring-transparent hover:border-transparent focus:ring-transparent focus:border-transparent focus:outline-none"
+						className="bg-red-700 text-white font-semibold sm:text-lg text-center py-1 px-6 rounded-lg mt-2 cursor-pointer hover:bg-red-600 transition-all place-self-end hover:ring-transparent hover:border-transparent focus:ring-transparent focus:border-transparent focus:outline-none"
 						onClick={handleSave}
 						disabled={isLoading}
 					>
