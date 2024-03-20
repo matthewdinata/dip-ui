@@ -1,10 +1,20 @@
 import { auth, db, GoogleProvider } from "@/services/firebase";
 import { signInWithPopup } from "firebase/auth";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import {
+	doc,
+	DocumentData,
+	getDoc,
+	setDoc,
+	updateDoc,
+} from "firebase/firestore";
+import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 
 export default function useAuth() {
 	const [user] = useAuthState(auth);
+	const [userInfo, setUserInfo] = useState<DocumentData | undefined>(
+		undefined
+	);
 
 	const login = async () => {
 		try {
@@ -18,6 +28,7 @@ export default function useAuth() {
 					email: res.user.email,
 					displayName: res.user.displayName,
 					profilePic: res.user.photoURL,
+					avatarId: 1,
 				});
 			}
 		} catch (error) {
@@ -33,5 +44,38 @@ export default function useAuth() {
 		}
 	};
 
-	return { user, login, logout };
+	const getUserData = async (uid: string) => {
+		const docRef = doc(db, "users", uid);
+		const docSnap = await getDoc(docRef);
+		return docSnap.data();
+	};
+
+	useEffect(() => {
+		// declare the data fetching function
+		const fetchUserData = async () => {
+			if (user) {
+				try {
+					const docData = await getUserData(user.uid);
+					setUserInfo(docData);
+				} catch (err) {
+					console.error("Failed to load user data.");
+				}
+			}
+		};
+
+		fetchUserData().catch(console.error);
+	}, [user]);
+
+	const updateUserData = async (obj: object) => {
+		try {
+			if (user) {
+				const docRef = doc(db, "users", user.uid);
+				await updateDoc(docRef, obj);
+			}
+		} catch (err) {
+			console.error("Failed to update user data.");
+		}
+	};
+
+	return { user, userInfo, login, logout, updateUserData };
 }

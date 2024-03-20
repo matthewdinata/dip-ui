@@ -1,7 +1,7 @@
 // Components
 import { IoIosArrowForward } from "react-icons/io";
 
-// Constants - utils
+// Utils
 import { useNavigate } from "react-router-dom";
 
 // Assets
@@ -112,7 +112,7 @@ export default function NewsSection() {
 			</div>
 			<div className="text-center md:text-base sm:text-sm text-xs">
 				Go back to reading{" "}
-				<span className="underline text-red-800 font-medium">
+				<span className="underline text-red-800 font-medium cursor-pointer">
 					Vaping is Harmful
 				</span>
 			</div>
