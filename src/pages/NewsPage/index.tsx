@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { IoIosArrowBack } from "react-icons/io";
 import axios from 'axios';
 
 const Button = ({
@@ -11,7 +10,7 @@ const Button = ({
 }) => {
 	return (
 		<button 
-			className="h-14 w-48 rounded-[1.5rem] text-xl text-red-500 bg-white border border-red-500 hover:font-bold hover:border-red-500 hover:border-2 px-4"
+			className="h-14 w-48 rounded-[1.5rem] text-sm md:text-2xl text-red-500 bg-white border border-red-500 hover:font-bold hover:border-red-500 hover:border-2 px-4"
 			onClick={onClick}
 		>
 			<div className="button-text">{title}</div>
@@ -29,22 +28,22 @@ interface NewsItemProps {
 
 const NewsItem: React.FC<NewsItemProps> = ({ image, title, description, url, publishedAt }) => {
 	return (
-		<div className="flex items-center justify-between p-4 border-solid border-red-200 hover:border-2 rounded-3xl px-4">
-			{/* Thumbnail */}
-			<div className="flex-shrink-0 mr-4 rounded-md">
+		<div className="flex flex-col md:flex-row item-center md:pl-20 md:pr-20 md:pt-8 md:mt-3 md:mb-3 md:border md:border-solid border-red-300 rounded-3xl">
+			{/* Image */}
+			<div className="h-24 w-36 px-8 md:h-72 md:w-60 md:py-4 rounded-md">
 				<img
 					src={image}
 					alt={title}
-					className="w-56 h-32 rounded-3xl mr-4"
+					className="h-36 w-60 md:h-56 md:w-96 rounded-3xl md:mr-8"
 				/>
 			</div>
 
 			{/* Title and Link */}
-			<div className="flex-grow border rounded-md p-2">
-				<h2 className="text-lg font-semibold">{title}</h2>
-				<h3 className="text-lg font-semibold">{description}</h3>
-				<h4 className="text-lg font-semibold">{publishedAt}</h4>
-				<a href={url} className="text-blue-500 hover:underline">
+			<div className="flex-row px-4 mt-16 mb-10 items-center md:flex-col md:ml-60 md:px-8">
+				<h2 className="text-base md:text-2xl font-bold">{title}</h2>
+				<h3 className="text-xs md:text-lg font-semibold">{description}</h3>
+				<h4 className="text-xs md:text-sm font-semibold">{publishedAt}</h4>
+				<a href={url} className="text-blue-500 text-base font-bold hover:underline">
 					Read more
 				</a>
 			</div>
@@ -65,7 +64,7 @@ const NewsComponentDrug: React.FC = () => {
 			  token: '8b949f96824fbfe538d0c0180d9eec3d',
 			  country: 'sg',
 			  q: "drugs",
-			  max: 2,
+			  max: 2, //number of articles displayed
 			  lang: 'en',
 			  media: 'straitstimes.com,channelnewsasia.com',
 			  sort: 'publishedAt',
@@ -285,10 +284,9 @@ export default function NewsPage() {
 
 	return (
 		<div className="min-h-screen">
-			<div className="mb-12 mt-24 flex flex-col gap-4">
-				<IoIosArrowBack className="text-3xl" />
-				<div className="text-3xl font-bold text-center">News</div>
-				<div className="flex flex-row gap-10 items-center justify-center">
+			<div className="pb-12 pt-8 md:pb-12 md:pt-24 flex flex-col gap-8">
+				<div className="text-3xl md:text-3xl font-bold text-center md:text-center">News</div>
+				<div className="flex flex-row gap-2 md:gap-10 justify-center">
 					<Button 
 						title="Drugs" 
 						onClick={() => handleTabChange("drugs")} 
@@ -306,7 +304,7 @@ export default function NewsPage() {
 						onClick={() => handleTabChange("heritage")} 
 					/>
 				</div>
-				<div className="flex flex-col gap-4 items-center">
+				<div className="flex flex-col gap-10 item-center">
 					{selectedCategory === "drugs" && <NewsComponentDrug />}
 					{selectedCategory === "cyberbullying" && <NewsComponentCyberbullying />}
 					{selectedCategory === "vape" && <NewsComponentVape />}
