@@ -1,0 +1,8 @@
+{
+  "projects": {
+    "default": "ntu-eee-dip-e028",
+    "prod": "ntu-eee-dip-e028"
+  },
+  "targets": {},
+  "etags": {}
+}

@@ -1,4 +1,7 @@
-/* Remove the #root  */
+#root {
+  background-color: #fff4ea;
+}
+
 .logo {
 	height: 6em;
 	padding: 1.5em;

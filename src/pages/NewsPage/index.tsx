@@ -61,7 +61,7 @@ const NewsComponentDrug: React.FC = () => {
 		try {
 		  const response = await axios.get('https://gnews.io/api/v4/search', {
 			params: {
-			  token: '8b949f96824fbfe538d0c0180d9eec3d',
+			  token: '412e719efb131fe993a0691df9f8d318',
 			  country: 'sg',
 			  q: "drugs",
 			  max: 2, //number of articles displayed
