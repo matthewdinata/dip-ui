@@ -28,18 +28,18 @@ interface NewsItemProps {
 
 const NewsItem: React.FC<NewsItemProps> = ({ image, title, description, url, publishedAt }) => {
 	return (
-		<div className="flex flex-col md:flex-row item-center md:pl-20 md:pr-20 md:pt-8 md:mt-3 md:mb-3 md:border md:border-solid border-red-300 rounded-3xl">
+		<div className="flex flex-col px-2 md:flex-row item-center md:pl-20 md:pr-20 md:pt-8 md:mt-3 md:mb-3 md:border md:border-solid border-red-300 rounded-3xl">
 			{/* Image */}
-			<div className="h-24 w-36 px-8 md:h-72 md:w-60 md:py-4 rounded-md">
+			<div className="h-28 w-44 md:h-72 md:w-60 md:py-4 rounded-md">
 				<img
 					src={image}
 					alt={title}
-					className="h-36 w-60 md:h-56 md:w-96 rounded-3xl md:mr-8"
+					className="h-40 w-72 px-2 md:h-56 md:w-96 rounded-3xl md:mr-8"
 				/>
 			</div>
 
 			{/* Title and Link */}
-			<div className="flex-row px-4 mt-16 mb-10 items-center md:flex-col md:ml-60 md:px-8">
+			<div className="flex-row px-2 mt-16 mb-10 items-center md:flex-col md:ml-60 md:px-8">
 				<h2 className="text-base md:text-2xl font-bold">{title}</h2>
 				<h3 className="text-xs md:text-lg font-semibold">{description}</h3>
 				<h4 className="text-xs md:text-sm font-semibold">{publishedAt}</h4>
@@ -61,7 +61,7 @@ const NewsComponentDrug: React.FC = () => {
 		try {
 		  const response = await axios.get('https://gnews.io/api/v4/search', {
 			params: {
-			  token: '412e719efb131fe993a0691df9f8d318',
+			  token: '8b949f96824fbfe538d0c0180d9eec3d',
 			  country: 'sg',
 			  q: "drugs",
 			  max: 2, //number of articles displayed
