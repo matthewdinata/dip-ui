@@ -2,22 +2,25 @@ import ChatbotIcon from "@/assets/ChatbotIcon.png";
 import { FaCircleChevronRight, FaChevronDown } from "react-icons/fa6";
 import { Message } from "./components/Messages";
 import Search, { SearchProps } from "antd/es/input/Search";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { MessageProps } from "./components/Messages";
 import { postChatBotGenerateStream } from "./api";
 import { useToast } from "@/hooks/useToast";
 import useAuth from "@/hooks/useAuth";
-import { mockMessages } from "./data";
+import { useChatScroll } from "./hooks";
+import { getUserAvatar } from "@/utils/userUtils";
+import { UserInfoType } from "@/types/userTypes";
+import avatar1 from "@/assets/avatar1@3x.png";
 
 export const ChatbotPage = () => {
 	// Todo, change profilePic to user.profile from firebase
-	const { user } = useAuth();
+	const { userInfo } = useAuth();
 
 	// Antd Notification Hook
 	const { ToastCreate } = useToast();
 
 	// Array of messages
-	const [messages, setMessages] = useState<MessageProps[]>(mockMessages);
+	const [messages, setMessages] = useState<MessageProps[]>([]);
 
 	// Streaming Message State
 	const [streamMessage, setStreamMessage] = useState<MessageProps>({
@@ -32,31 +35,11 @@ export const ChatbotPage = () => {
 
 	const [isBottom, setIsBottom] = useState<boolean>(true);
 
-	// ref for messageContainerDiv
-	const messageContainerRef = useRef<HTMLDivElement | null>(null);
-
-	// ref for scrollDiv
-	const scrollBarContainerRef = useRef<HTMLDivElement | null>(null);
-
-	// function to set state when user is not at the bottom
-	const handleScroll = () => {
-		if (scrollBarContainerRef.current) {
-			// Destruct relevants metrics
-			const { scrollHeight, scrollTop, clientHeight } =
-				scrollBarContainerRef.current;
-			// Formula whether user is bottom of the scrollbar div
-			// console.log("ScrollHeight - scrollTop: " + (scrollHeight-scrollTop).toString())
-			// console.log(clientHeight);
-			setIsBottom(
-				Math.round(scrollHeight - scrollTop - 40.66) <= clientHeight
-			);
-		}
-	};
-
-	const handleClick = (e:React.MouseEvent<HTMLElement>) =>{
-		e.preventDefault();
-		messageContainerRef.current?.scrollIntoView({ block: "end" });
-	}
+	const {
+		messageContainerRef,
+		scrollBarContainerRef,
+		handleClickScrollIntoView,
+	} = useChatScroll({ messages, streamMessage });
 
 	// handleSearch input
 	const handleSearch: SearchProps["onSearch"] = async (value, e) => {
@@ -70,11 +53,13 @@ export const ChatbotPage = () => {
 			setInputValue("");
 
 			// Append to messages, user first
-			if (user?.photoURL) {
+			if (userInfo) {
 				setMessages((prevMessages) => [
 					...prevMessages,
 					{
-						profilePic: user.photoURL,
+						profilePic: userInfo
+							? getUserAvatar(userInfo as UserInfoType)
+							: avatar1,
 						message: temp,
 					},
 				]);
@@ -122,21 +107,20 @@ export const ChatbotPage = () => {
 		}
 	};
 
-	// When messge state is update, the user will be dragged to the bottom of chat.
-	useEffect(() => {
-		// Scroll to the bottom
-		messageContainerRef.current?.scrollIntoView({
-			block: "end",
-			behavior: "smooth",
-		});
-	}, [messages]);
-
-	// When the component is mounted, the view of the chat will be at the bottom of the scroll
-	useEffect(() => {
-		// Scroll to the bottom
-		messageContainerRef.current?.scrollIntoView({ block: "end" });
-	}, [streamMessage]);
-
+	// function to set state when user is not at the bottom
+	const handleScroll = () => {
+		if (scrollBarContainerRef.current) {
+			// Destruct relevants metrics
+			const { scrollHeight, scrollTop, clientHeight } =
+				scrollBarContainerRef.current;
+			// Formula whether user is bottom of the scrollbar div
+			// console.log("ScrollHeight - scrollTop: " + (scrollHeight-scrollTop).toString())
+			// console.log(clientHeight);
+			setIsBottom(
+				Math.round(scrollHeight - scrollTop - 40.66) <= clientHeight
+			);
+		}
+	};
 	return (
 		// Todo: Add navbar
 		<div className="relative h-[calc(100vh-3rem)] overflow-hidden">
@@ -177,7 +161,7 @@ export const ChatbotPage = () => {
 					{!isBottom && (
 						<button
 							className={`absolute duration-100 z-50 rounded-full flex items-center justify-center w-10 h-10 bottom-24`}
-							onClick={handleClick}
+							onClick={handleClickScrollIntoView}
 						>
 							<div className="flex-grow">
 								<FaChevronDown />
