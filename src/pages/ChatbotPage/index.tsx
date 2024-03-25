@@ -7,6 +7,7 @@ import { MessageProps } from "./components/Messages";
 import { postChatBotGenerateStream } from "./api";
 import { useToast } from "@/hooks/useToast";
 import useAuth from "@/hooks/useAuth";
+import { mockMessages } from "./data";
 
 export const ChatbotPage = () => {
 	// Todo, change profilePic to user.profile from firebase
@@ -16,7 +17,7 @@ export const ChatbotPage = () => {
 	const { ToastCreate } = useToast();
 
 	// Array of messages
-	const [messages, setMessages] = useState<MessageProps[]>([]);
+	const [messages, setMessages] = useState<MessageProps[]>(mockMessages);
 
 	// Streaming Message State
 	const [streamMessage, setStreamMessage] = useState<MessageProps>({
@@ -141,11 +142,11 @@ export const ChatbotPage = () => {
 		<div className="relative h-[calc(100vh-3rem)] overflow-hidden">
 			<div className="flex flex-col gap-9 w-full h-full justify-center items-center overflow-hidden py-8">
 				<div
-					className="flex-1 w-full h-full flex justify-center items-center overflow-y-auto px-1 "
+					className="flex-grow w-full h-full flex justify-center items-center overflow-y-auto sm:px-1 px-0 scrollbar-hide"
 					onScroll={handleScroll}
 					ref={scrollBarContainerRef}
 				>
-					<div className="min-w-[300px] w-3/5 h-full">
+					<div className="w-full sm:w-3/5 h-full">
 						<div
 							ref={messageContainerRef}
 							className="w-full flex flex-col gap-7 my-4 flex-1"
@@ -186,7 +187,7 @@ export const ChatbotPage = () => {
 				</div>
 				{/* Use antdesign component */}
 				<div className="w-full flex justify-center gap-1">
-					<div className="min-w-[300px] w-3/5 flex-grow-1 md:flex-grow-0 md:min-w-[330px]">
+					<div className="w-full md:w-3/5 flex-grow-1 md:flex-grow-0 md:min-w-[330px]">
 						<Search
 							placeholder="Enter your message here"
 							onSearch={handleSearch}
