@@ -1,5 +1,9 @@
 import { Link } from 'react-router-dom';
 
+interface CustomRedButtonProps  extends React.ButtonHTMLAttributes<HTMLButtonElement>{
+  title:string
+}
+
 export default function Button({
   title,
   link,
@@ -32,4 +36,14 @@ export default function Button({
       </button>
     </Link>
   );
+}
+
+// Todo: Enable selection of different colors
+export const CustomRedButton = ({title, ...attributes}:CustomRedButtonProps) => {
+  return(
+    <button className='bg-[#ca3735] hover:bg-[#ca37356e] text-center text-white hover:text-black min-w-[175px]' {...attributes}>
+      {title}
+    </button>
+  )
+
 }

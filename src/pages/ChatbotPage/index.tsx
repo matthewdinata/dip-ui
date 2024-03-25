@@ -11,9 +11,11 @@ import { useChatScroll } from "./hooks";
 import { getUserAvatar } from "@/utils/userUtils";
 import { UserInfoType } from "@/types/userTypes";
 import avatar1 from "@/assets/avatar1@3x.png";
+import { CustomRedButton } from "@/components/Button";
+import { buttonData } from "./data";
 
+// Todo: Optional - Add animation
 export const ChatbotPage = () => {
-	// Todo, change profilePic to user.profile from firebase
 	const { userInfo } = useAuth();
 
 	// Antd Notification Hook
@@ -32,14 +34,57 @@ export const ChatbotPage = () => {
 	const [inputValue, setInputValue] = useState("");
 
 	// state for checking if user scrolled up from latest message
-
 	const [isBottom, setIsBottom] = useState<boolean>(true);
 
+	// custom functions and refs from custom hook
 	const {
 		messageContainerRef,
 		scrollBarContainerRef,
 		handleClickScrollIntoView,
 	} = useChatScroll({ messages, streamMessage });
+
+	// Make api call to backend
+	const handleApiCall = async (message: string) => {
+		try {
+			const stream = await postChatBotGenerateStream(message);
+			let intermediateMessage = "";
+
+			for await (const chunk of stream) {
+				// const cleanChunk = chunk.split("data:")[1].trim();
+				intermediateMessage += chunk;
+				// Render stream message
+				setStreamMessage((prevState) => ({
+					...prevState,
+					message: prevState.message + chunk,
+				}));
+			}
+
+			// After the for-await loop, append the completed streamMessage into messages
+			setMessages((prevMessages) => [
+				...prevMessages,
+				{
+					profilePic: streamMessage.profilePic,
+					message: intermediateMessage,
+				},
+			]);
+			// Reset the streamMessage state
+			setStreamMessage((prevState) => ({
+				...prevState,
+				message: "",
+			}));
+		} catch (err) {
+			/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access */
+			const error = err as { message: string };
+			const errorMessageObject = JSON.parse(error.message);
+			ToastCreate({
+				message: "Status " + errorMessageObject.status,
+				description: errorMessageObject.message,
+				placement: "topRight",
+				toastType: "error",
+			});
+			/* eslint-enable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access */
+		}
+	};
 
 	// handleSearch input
 	const handleSearch: SearchProps["onSearch"] = async (value, e) => {
@@ -65,45 +110,7 @@ export const ChatbotPage = () => {
 				]);
 			}
 
-			try {
-				const stream = await postChatBotGenerateStream(temp);
-				let intermediateMessage = "";
-
-				for await (const chunk of stream) {
-					// const cleanChunk = chunk.split("data:")[1].trim();
-					intermediateMessage += chunk;
-					// Render stream message
-					setStreamMessage((prevState) => ({
-						...prevState,
-						message: prevState.message + chunk,
-					}));
-				}
-
-				// After the for-await loop, append the completed streamMessage into messages
-				setMessages((prevMessages) => [
-					...prevMessages,
-					{
-						profilePic: streamMessage.profilePic,
-						message: intermediateMessage,
-					},
-				]);
-				// Reset the streamMessage state
-				setStreamMessage((prevState) => ({
-					...prevState,
-					message: "",
-				}));
-			} catch (err) {
-				/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access */
-				const error = err as { message: string };
-				const errorMessageObject = JSON.parse(error.message);
-				ToastCreate({
-					message: "Status " + errorMessageObject.status,
-					description: errorMessageObject.message,
-					placement: "topRight",
-					toastType: "error",
-				});
-			}
-			/* eslint-enable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access */
+			await handleApiCall(temp);
 		}
 	};
 
@@ -121,6 +128,30 @@ export const ChatbotPage = () => {
 			);
 		}
 	};
+
+	// handle optionClick
+	const handleOption = async ({
+		e,
+		title,
+	}: {
+		e: React.MouseEvent<HTMLElement>;
+		title: string;
+	}) => {
+		e.preventDefault();
+		if (userInfo) {
+			setMessages((prevMessages) => [
+				...prevMessages,
+				{
+					profilePic: userInfo
+						? getUserAvatar(userInfo as UserInfoType)
+						: avatar1,
+					message: `Hello, I would like to learn about ${title}`,
+				},
+			]);
+			await handleApiCall(`Hello, I would like to learn about ${title}`);
+		}
+	};
+
 	return (
 		// Todo: Add navbar
 		<div className="relative h-[calc(100vh-3rem)] overflow-hidden">
@@ -131,32 +162,66 @@ export const ChatbotPage = () => {
 					ref={scrollBarContainerRef}
 				>
 					<div className="w-full sm:w-3/5 h-full">
-						<div
-							ref={messageContainerRef}
-							className="w-full flex flex-col gap-7 my-4 flex-1"
-							onScroll={handleScroll}
-						>
-							{/* Message compnent will be mapped from state */}
-							<Message
-								profilePic={ChatbotIcon}
-								message={
-									"Hello, what do you want to learn about? Heritage, drugs?"
-								}
-							/>
-							{messages.map((message, i) => (
+						{messages.length > 0 ? (
+							<div
+								ref={messageContainerRef}
+								className={`w-full flex flex-col gap-7 my-4 flex-1`}
+								onScroll={handleScroll}
+							>
+								{/* Message compnent will be mapped from state */}
 								<Message
-									key={i}
-									profilePic={message.profilePic}
-									message={message.message}
+									profilePic={ChatbotIcon}
+									message={
+										"Hello, what do you want to know about more today?"
+									}
 								/>
-							))}
-							{streamMessage.message !== "" && (
-								<Message
-									profilePic={streamMessage.profilePic}
-									message={streamMessage.message}
-								/>
-							)}
-						</div>
+								{messages.map((message, i) => (
+									<Message
+										key={i}
+										profilePic={message.profilePic}
+										message={message.message}
+									/>
+								))}
+								{streamMessage.message !== "" && (
+									<Message
+										profilePic={streamMessage.profilePic}
+										message={streamMessage.message}
+									/>
+								)}
+							</div>
+						) : (
+							// Chatbot landing page
+							<div className="flex h-full">
+								<div className="flex flex-col justify-center items-center gap-2 m-auto">
+									<div className="relative flex flex-col items-center text-center gap-2 bg-white p-4 rounded-lg">
+										<img
+											src={ChatbotIcon}
+											className="absolute w-8 h-8 rounded-full -top-5"
+										/>
+										<span>Hi, its Bobby!</span>
+										<span>
+											What do you want to know about more
+											today?
+										</span>
+									</div>
+
+									<div className="flex flex-col gap-2">
+										{buttonData.map((item) => (
+											<CustomRedButton
+												key={item.id}
+												title={item.title}
+												onClick={(e) =>
+													handleOption({
+														e,
+														title: item.title,
+													})
+												}
+											/>
+										))}
+									</div>
+								</div>
+							</div>
+						)}
 					</div>
 					{!isBottom && (
 						<button
@@ -184,6 +249,7 @@ export const ChatbotPage = () => {
 							allowClear
 							value={inputValue}
 							onChange={(e) => setInputValue(e.target.value)}
+							disabled={Boolean(messages.length <= 0)}
 						/>
 					</div>
 				</div>
