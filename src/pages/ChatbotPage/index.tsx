@@ -18,10 +18,10 @@ import { buttonData } from "./data";
 // Types
 import { MessageProps } from "./types";
 import { UserInfoType } from "@/types/userTypes";
-import { SearchProps } from "antd/es/input/Search"
+import { SearchProps } from "antd/es/input/Search";
 // Utils
 import { getUserAvatar } from "@/utils/userUtils";
-
+import { ConfigProvider } from "antd";
 
 // Todo: Optional - Add animation
 export const ChatbotPage = () => {
@@ -160,107 +160,116 @@ export const ChatbotPage = () => {
 	};
 
 	return (
-		// Todo: Add navbar
-		<div className="relative h-[calc(100vh-3rem)] overflow-hidden">
-			<div className="flex flex-col gap-9 w-full h-full justify-center items-center overflow-hidden py-8">
-				<div
-					className="flex-grow w-full h-full flex justify-center items-center overflow-y-auto sm:px-1 px-0 scrollbar-hide"
-					onScroll={handleScroll}
-					ref={scrollBarContainerRef}
-				>
-					<div className="w-full sm:w-3/5 h-full">
-						{messages.length > 0 ? (
-							<div
-								ref={messageContainerRef}
-								className={`w-full flex flex-col gap-7 my-4 flex-1`}
-								onScroll={handleScroll}
-							>
-								{/* Message compnent will be mapped from state */}
-								<Message
-									profilePic={ChatbotIcon}
-									message={
-										"Hello, what do you want to know about more today?"
-									}
-								/>
-								{messages.map((message, i) => (
+		// Change antdesign search button to red
+		<ConfigProvider
+			theme={{
+				token: {
+					colorPrimary: "#ca3735",
+				},
+			}}
+		>
+			<div className="relative h-[calc(100vh-3rem)] overflow-hidden">
+				<div className="flex flex-col gap-9 w-full h-full justify-center items-center overflow-hidden py-8">
+					<div
+						className="flex-grow w-full h-full flex justify-center items-center overflow-y-auto sm:px-1 px-0 scrollbar-hide"
+						onScroll={handleScroll}
+						ref={scrollBarContainerRef}
+					>
+						<div className="w-full sm:w-3/5 h-full">
+							{messages.length > 0 ? (
+								<div
+									ref={messageContainerRef}
+									className={`w-full flex flex-col gap-7 my-4 flex-1`}
+									onScroll={handleScroll}
+								>
+									{/* Message compnent will be mapped from state */}
 									<Message
-										key={i}
-										profilePic={message.profilePic}
-										message={message.message}
+										profilePic={ChatbotIcon}
+										message={
+											"Hello, what do you want to know about more today?"
+										}
 									/>
-								))}
-								{streamMessage.message !== "" && (
-									<Message
-										profilePic={streamMessage.profilePic}
-										message={streamMessage.message}
-									/>
-								)}
-							</div>
-						) : (
-							// Chatbot landing page
-							<div className="flex h-full">
-								<div className="flex flex-col justify-center items-center gap-2 m-auto">
-									<div className="relative flex flex-col items-center text-center gap-2 bg-white p-4 rounded-lg">
-										<img
-											src={ChatbotIcon}
-											className="absolute w-8 h-8 rounded-full -top-5"
+									{messages.map((message, i) => (
+										<Message
+											key={i}
+											profilePic={message.profilePic}
+											message={message.message}
 										/>
-										<span>Hi, its Bobby!</span>
-										<span>
-											What do you want to know about more
-											today?
-										</span>
-									</div>
-
-									<div className="flex flex-col gap-2">
-										{buttonData.map((item) => (
-											<CustomRedButton
-												key={item.id}
-												title={item.title}
-												onClick={(e) =>
-													handleOption({
-														e,
-														title: item.title,
-													})
-												}
+									))}
+									{streamMessage.message !== "" && (
+										<Message
+											profilePic={
+												streamMessage.profilePic
+											}
+											message={streamMessage.message}
+										/>
+									)}
+								</div>
+							) : (
+								// Chatbot landing page
+								<div className="flex h-full">
+									<div className="flex flex-col justify-center items-center gap-2 m-auto">
+										<div className="relative flex flex-col items-center text-center gap-2 bg-white p-4 rounded-lg">
+											<img
+												src={ChatbotIcon}
+												className="absolute w-12 h-12 rounded-full -top-9"
 											/>
-										))}
+											<span>Hi, its Bobby!</span>
+											<span>
+												What do you want to know about
+												more today?
+											</span>
+										</div>
+
+										<div className="flex flex-col gap-2">
+											{buttonData.map((item) => (
+												<CustomRedButton
+													key={item.id}
+													title={item.title}
+													onClick={(e) =>
+														handleOption({
+															e,
+															title: item.title,
+														})
+													}
+												/>
+											))}
+										</div>
 									</div>
 								</div>
-							</div>
+							)}
+						</div>
+						{!isBottom && (
+							<button
+								className={`absolute duration-100 z-50 rounded-full flex items-center justify-center w-10 h-10 bottom-24`}
+								onClick={handleClickScrollIntoView}
+							>
+								<div className="flex-grow">
+									<FaChevronDown />
+								</div>
+							</button>
 						)}
 					</div>
-					{!isBottom && (
-						<button
-							className={`absolute duration-100 z-50 rounded-full flex items-center justify-center w-10 h-10 bottom-24`}
-							onClick={handleClickScrollIntoView}
-						>
-							<div className="flex-grow">
-								<FaChevronDown />
-							</div>
-						</button>
-					)}
-				</div>
-				{/* Use antdesign component */}
-				<div className="w-full flex justify-center gap-1">
-					<div className="w-full md:w-3/5 flex-grow-1 md:flex-grow-0 md:min-w-[330px]">
-						<Search
-							placeholder="Enter your message here"
-							onSearch={handleSearch}
-							enterButton={
-								<div className="flex justify-center items-center">
-									<FaCircleChevronRight />
-								</div>
-							}
-							className="px-2"
-							allowClear
-							value={inputValue}
-							onChange={(e) => setInputValue(e.target.value)}
-							disabled={Boolean(messages.length <= 0)}
-						/>
+					{/* Use antdesign component */}
+					<div className="sticky  w-full flex justify-center gap-1">
+						<div className="w-full md:w-3/5 flex-grow-1 md:flex-grow-0 md:min-w-[330px]">
+							<Search
+								placeholder="Enter your message here"
+								onSearch={handleSearch}
+								enterButton={
+									<div className="flex justify-center items-center">
+										<FaCircleChevronRight />
+									</div>
+								}
+								className="px-2"
+								value={inputValue}
+								onChange={(e) => setInputValue(e.target.value)}
+								disabled={Boolean(messages.length <= 0)}
+							/>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		</ConfigProvider>
 	);
 };

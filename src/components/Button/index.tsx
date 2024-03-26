@@ -38,7 +38,7 @@ export default function Button({
 // Todo: Enable selection of different colors
 export const CustomRedButton = ({title, ...attributes}:CustomRedButtonProps) => {
   return(
-    <button className='bg-[#ca3735] hover:bg-[#ca37356e] text-center text-white hover:text-black min-w-[175px]' {...attributes}>
+    <button className='bg-[#ca3735] hover:bg-[#ca37356e] text-center text-white hover:text-black min-w-[175px] hover:border-black' {...attributes}>
       {title}
     </button>
   )
