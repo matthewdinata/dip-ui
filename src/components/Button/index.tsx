@@ -1,8 +1,5 @@
 import { Link } from 'react-router-dom';
-
-interface CustomRedButtonProps  extends React.ButtonHTMLAttributes<HTMLButtonElement>{
-  title:string
-}
+import { CustomRedButtonProps } from './types';
 
 export default function Button({
   title,

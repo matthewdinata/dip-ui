@@ -1,9 +1,7 @@
 import ChatbotIcon from "@/assets/ChatbotIcon.png"
 import DefaultProfile from "@/assets/DefaultProfile.svg";
-type buttonDataType = {
-  id: number,
-  title: string,
-}
+import { ButtonDataType } from "@/components/Button/types";
+
 // Mock data
 export const mockMessages = [
     {
@@ -53,7 +51,7 @@ export const mockMessages = [
 ]
 
 // Landing page button details
-export const buttonData:buttonDataType[] = [
+export const buttonData:ButtonDataType[] = [
   {
     id: 1,
     title: "Vape", 

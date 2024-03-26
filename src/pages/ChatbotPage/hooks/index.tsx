@@ -1,10 +1,5 @@
 import { useEffect, useRef } from "react";
-import { MessageProps } from "../components/Messages";
-
-interface UseChatScrollProps {
-    messages: MessageProps[],
-    streamMessage: MessageProps
-}
+import { UseChatScrollProps } from "../types";
 
 /**
  * Custom hook for handling chat scrolling behavior.

@@ -1,18 +1,27 @@
-import ChatbotIcon from "@/assets/ChatbotIcon.png";
+// React libs
+import { useState } from "react";
+// Components
 import { FaCircleChevronRight, FaChevronDown } from "react-icons/fa6";
 import { Message } from "./components/Messages";
-import Search, { SearchProps } from "antd/es/input/Search";
-import { useState } from "react";
-import { MessageProps } from "./components/Messages";
+import { CustomRedButton } from "@/components/Button";
+import Search from "antd/es/input/Search";
+// API
 import { postChatBotGenerateStream } from "./api";
+// Assets
+import avatar1 from "@/assets/avatar1@3x.png";
+import ChatbotIcon from "@/assets/ChatbotIcon.png";
+// Hooks
 import { useToast } from "@/hooks/useToast";
 import useAuth from "@/hooks/useAuth";
 import { useChatScroll } from "./hooks";
-import { getUserAvatar } from "@/utils/userUtils";
-import { UserInfoType } from "@/types/userTypes";
-import avatar1 from "@/assets/avatar1@3x.png";
-import { CustomRedButton } from "@/components/Button";
 import { buttonData } from "./data";
+// Types
+import { MessageProps } from "./types";
+import { UserInfoType } from "@/types/userTypes";
+import { SearchProps } from "antd/es/input/Search"
+// Utils
+import { getUserAvatar } from "@/utils/userUtils";
+
 
 // Todo: Optional - Add animation
 export const ChatbotPage = () => {
@@ -121,8 +130,6 @@ export const ChatbotPage = () => {
 			const { scrollHeight, scrollTop, clientHeight } =
 				scrollBarContainerRef.current;
 			// Formula whether user is bottom of the scrollbar div
-			// console.log("ScrollHeight - scrollTop: " + (scrollHeight-scrollTop).toString())
-			// console.log(clientHeight);
 			setIsBottom(
 				Math.round(scrollHeight - scrollTop - 40.66) <= clientHeight
 			);
