@@ -1,7 +1,4 @@
-export interface MessageProps {
-	profilePic: string | null | undefined;
-	message: string;
-}
+import { MessageProps } from "../types";
 
 export const Message = ({ profilePic, message }: MessageProps) => {
 	return (
