@@ -22,6 +22,13 @@ export default function Navbar() {
 	const { pathname } = location;
 	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
+	const handleLogout = async () => {
+		if (user) {
+			await logout();
+		}
+		navigate("/");
+	};
+
 	return (
 		<div className="w-full h-12 bg-white drop-shadow-md grid grid-cols-3 gap-x-4 items-center px-4">
 			{pathname === "/dashboard" ? (
@@ -64,18 +71,20 @@ export default function Navbar() {
 						</div>
 						<div
 							className="bg-red-100 hover:bg-red-200 transition-all text-black text-xs md:text-sm font-medium py-1 px-2 sm:px-5 rounded-xl cursor-pointer"
-							onClick={logout}
+							onClick={handleLogout}
 						>
 							LOGOUT
 						</div>
 					</div>
-				) : (
+				) : pathname !== "/" ? (
 					<div
 						className="bg-orange-100 hover:bg-yellow-300 transition-all text-black text-xs md:text-sm font-medium py-1 px-2 sm:px-5 rounded-xl cursor-pointer"
 						onClick={login}
 					>
 						LOGIN
 					</div>
+				) : (
+					<></>
 				)}
 			</div>
 		</div>
