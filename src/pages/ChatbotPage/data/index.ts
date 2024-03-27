@@ -63,9 +63,9 @@ export const buttonData:ButtonDataType[] = [
   {
     id:3,
     title: "Cyberbullying",
-  },
-  {
-    id:4,
-    title: "Singapore Heritage"
   }
+  // {
+  //   id:4,
+  //   title: "Singapore Heritage"
+  // }
 ]
