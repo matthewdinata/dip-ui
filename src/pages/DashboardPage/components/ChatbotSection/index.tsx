@@ -8,7 +8,7 @@ export default function ChatbotSection() {
 	const navigate = useNavigate();
 	return (
 		<div className="w-full flex justify-center">
-			<div className="flex flex-row gap-4 sm:gap-6 w-full sm:w-3/4 items-center justify-center">
+			<div className="flex flex-row gap-4 sm:gap-6 w-full sm:w-3/4 items-center justify-center mb-8">
 				<img src={chatbotMascot} className="w-1/2" />
 				<div className="flex flex-col gap-4 ">
 					<div className="flex flex-col sm:gap-1">
