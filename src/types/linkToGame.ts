@@ -1,7 +1,7 @@
 /**
  * Represents a link to a game, puzzle or crossword
  */
-type LinkToGameType = {
+export type LinkToGameType = {
     /**
      * The id of the game
      */
@@ -14,4 +14,10 @@ type LinkToGameType = {
      * The url for the game.
      */
     url: string,
+}
+
+export type MockGameLinkDataTypes = {
+    id:number,
+    title:string,
+    linkTo:LinkToGameType[],
 }

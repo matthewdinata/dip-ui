@@ -44,7 +44,7 @@ export default function GameSection() {
 		{
 			title: "Find the Symptoms",
 			thumbnailImage: crosswordThumbnail,
-			urlPath: "/quiz",
+			urlPath: "/crosswords",
 		},
 		{
 			title: "Be Drug ARware",
@@ -54,7 +54,7 @@ export default function GameSection() {
 		{
 			title: "Puzzles",
 			thumbnailImage: puzzleThumbnail,
-			urlPath: "/puzzle",
+			urlPath: "/puzzles",
 		},
 	];
 

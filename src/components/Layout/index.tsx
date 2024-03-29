@@ -1,3 +1,4 @@
+import { LinkToGameType } from "@/types/linkToGame"
 import { Link } from "react-router-dom"
 
 

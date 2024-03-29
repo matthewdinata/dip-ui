@@ -10,27 +10,22 @@ const Button = ({
 	imageClassName?: string;
 }) => {
 	return (
-		<a
-      		href={link}
-      		target="_blank"
-      		rel="noopener noreferrer"
-      		className="button"
-    	>
-		<button className="md:h-40 md:w-40 bg-[#ca3735] hover:bg-[#ca37356e] text-center text-white hover:text-black min-w-[175px] hover:border-black px-4">
-			<div className="button-text">
-				{thumbnailImage && (
-					<div className="image-container">
-						<img
-							className={imageClassName}
-							src={thumbnailImage}
-							alt={title} // Provide alt text for accessibility
-						/>
-					</div>
-				)}
-				<span className="text-2xl">{title}</span>
-			</div>
-		</button>
-	</a>
+		<a href={link} target="_blank" rel="noopener noreferrer" className="button">
+			<button className="md:h-40 md:w-40 bg-[#ca3735] hover:bg-[#ca37356e] text-center text-white hover:text-black min-w-[175px] hover:border-black px-4">
+				<div className="button-text">
+					{thumbnailImage && (
+						<div className="image-container">
+							<img
+								className={imageClassName}
+								src={thumbnailImage}
+								alt={title} // Provide alt text for accessibility
+							/>
+						</div>
+					)}
+					<span className="text-2xl">{title}</span>
+				</div>
+			</button>
+		</a>
 	);
 };
 
