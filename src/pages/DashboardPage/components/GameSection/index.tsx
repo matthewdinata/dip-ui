@@ -52,9 +52,9 @@ export default function GameSection() {
 			urlPath: "/quiz",
 		},
 		{
-			title: "Quiz Yourself!",
+			title: "Puzzles",
 			thumbnailImage: puzzleThumbnail,
-			urlPath: "/quiz",
+			urlPath: "/puzzle",
 		},
 	];
 

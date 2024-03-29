@@ -14,6 +14,7 @@ import QuizPage from "./pages/QuizPage";
 import NewsPage from "./pages/NewsPage";
 import { ToastProvider } from "./context/ToastContext";
 import { ConfigProvider } from "antd";
+import { PuzzlePage } from "./pages/PuzzlePage";
 
 function App() {
 	return (
@@ -44,6 +45,7 @@ function App() {
 								/>
 								<Route path="/quiz" element={<QuizPage />} />
 								<Route path="/news" element={<NewsPage />} />
+								<Route path="/puzzle" element={<PuzzlePage />} />
 							</Routes>
 						</div>
 					</Router>
