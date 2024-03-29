@@ -1,58 +1,65 @@
-import React from "react";
+import React, { useState } from 'react';
+import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
+import { useParams } from "react-router-dom";
 
-// Assets
-import { IoIosArrowBack } from "react-icons/io";
-import newsThumbnail from "@/assets/newsThumbnail@3x.png";
-
-// Constants - utils
-import { useNavigate } from "react-router-dom";
+// Define a QueryClient instance
+const queryClient = new QueryClient();
 
 const Button = ({
 	title,
-	thumbnailImage,
-	imageClassName,
+	onClick,
 }: {
 	title: string;
-	thumbnailImage?: string;
-	imageClassName?: string;
+	onClick: () => void;
 }) => {
 	return (
-		<button className="h-14 w-48 rounded-[1.5rem] text-xl text-red-500 bg-white border border-red-500 hover:font-bold hover:border-red-500 hover:border-2 px-4">
+		<button 
+			className="h-14 w-48 rounded-[1.5rem] text-sm md:text-2xl bg-[#ca3735] hover:bg-[#ca37356e] text-center text-white hover:text-black min-w-[175px] hover:border-black px-4"
+			onClick={onClick}
+		>
 			<div className="button-text">{title}</div>
-			{thumbnailImage && (
-				<div className="image-container">
-					<img
-						className={imageClassName}
-						src={thumbnailImage}
-						alt={title} // Provide alt text for accessibility
-					/>
-				</div>
-			)}
 		</button>
 	);
 };
 
 interface NewsItemProps {
-	thumbnail: string;
 	title: string;
-	newsLink: string;
+	urlToImage: string;
+	url: string;
+	publishedAt: string;
 }
-const NewsItem: React.FC<NewsItemProps> = ({ thumbnail, title, newsLink }) => {
+
+const NewsItem: React.FC<NewsItemProps> = ({ title, urlToImage, url, publishedAt}) => {
+	const openNewsPage = async (event: React.MouseEvent<HTMLAnchorElement>) => {
+		event.preventDefault();
+		// Fetch the news content from the provided URL
+		const response = await fetch(
+			'https://asia-southeast2-ntu-eee-dip-e028.cloudfunctions.net/dip-backend-functions/fetch_article?url=' + encodeURIComponent(url)
+		);
+		const newsContent = await response.text();
+	
+		window.location.href = `/news/article?url=${url}&content=${newsContent}`;
+	}
 	return (
-		<div className="flex items-center justify-between p-4 border-solid border-red-200 hover:border-2 rounded-3xl px-4">
-			{/* Thumbnail */}
-			<div className="flex-shrink-0 mr-4 rounded-md">
+		<div className="flex flex-col px-2 md:flex-row item-center md:pl-20 md:pr-20 md:pt-8 md:mt-3 md:mb-3 md:border md:border-solid border-red-300 rounded-3xl">
+			{/* Image */}
+			<div className="h-28 w-44 md:h-72 md:w-60 md:py-4 rounded-md">
 				<img
-					src={thumbnail}
+					src={urlToImage}
 					alt={title}
-					className="w-56 h-32 rounded-3xl mr-4"
+					className="h-40 w-72 px-2 md:h-56 md:w-96 rounded-3xl md:mr-8"
 				/>
 			</div>
 
 			{/* Title and Link */}
-			<div className="flex-grow border rounded-md p-2">
-				<h2 className="text-lg font-semibold">{title}</h2>
-				<a href={newsLink} className="text-blue-500 hover:underline">
+			<div className="flex-row px-2 mt-16 mb-10 items-center md:flex-col md:ml-60 md:px-8">
+				<h2 className="text-base md:text-2xl font-bold">{title}</h2>
+				<h4 className="text-xs md:text-sm font-semibold">{publishedAt.split('T')[0]}</h4>
+				<a 
+                    href ={`/news/article?url=${url}`}
+                    onClick={openNewsPage}
+                    className="text-blue-500 text-base font-bold hover:underline"
+                >
 					Read more
 				</a>
 			</div>
@@ -60,58 +67,96 @@ const NewsItem: React.FC<NewsItemProps> = ({ thumbnail, title, newsLink }) => {
 	);
 };
 
-export default function NewsPage() {
-	const navigate = useNavigate();
-	const handleNavigateToDashboardPage = () => {
-		navigate("/dashboard");
-	};
+//Line 83-142 are News Fetching
+const fetchNews = async (topic: string, current_date: string) => {
+	const response = await fetch(`https://asia-southeast2-ntu-eee-dip-e028.cloudfunctions.net/dip-backend-functions/fetch_metadata?topic=${topic}&current_date=${current_date}`);
+	if (!response.ok) {
+	  throw new Error('Failed to fetch news');
+	}
+	return response.json();
+  };
+  
+  const NewsComponentDrug: React.FC = () => {
+	const { data, isLoading, isError } = useQuery('drug', () => fetchNews('drug', '2024-03-29'));
+
+	if (isLoading) {
+	  return <div>Loading...</div>;
+	}
+  
+	if (isError) {
+	  return <div>Error: Failed to fetch news</div>;
+	}
+  
 	return (
+	  <div>
+		{data.metadata.map((article: any) => (
+		  <NewsItem
+		  	key={article.url}
+			title={article.title}
+			urlToImage={article.urlToImage}
+			url={article.url}
+			publishedAt={article.publishedAt}
+		  />
+		))}
+	  </div>
+	);
+  };
+
+  const NewsComponentVape: React.FC = () => {
+	const { data, isLoading, isError } = useQuery('vape', () => fetchNews('vape', '2024-03-29'));
+  
+	if (isLoading) {
+	  return <div>Loading...</div>;
+	}
+  
+	if (isError) {
+	  return <div>Error: Failed to fetch news</div>;
+	}
+  
+	return (
+		<div>
+		{data.metadata.map((article: any) => (
+		  <NewsItem
+		  	key={article.url}
+			title={article.title}
+			urlToImage={article.urlToImage}
+			url={article.url}
+			publishedAt={article.publishedAt}
+		  />
+		))}
+	  </div>
+	);
+  };
+
+
+export default function NewsPage() {
+	const [selectedCategory, setSelectedCategory] = useState("drug");
+
+	const handleTabChange = (category: string) => {
+		setSelectedCategory(category);
+	};
+
+	return (
+		<QueryClientProvider client={queryClient}>
 		<div className="min-h-screen">
-			<div className="mb-12 mt-24 flex flex-col gap-4">
-				<div className="flex justify-center relative">
-					<IoIosArrowBack
-						className="text-3xl absolute left-0"
-						onClick={handleNavigateToDashboardPage}
+			<div className="pb-12 pt-8 md:pb-12 md:pt-24 flex flex-col gap-8">
+				<div className="text-3xl md:text-5xl font-bold text-center md:text-center">News</div>
+				<div className="flex flex-row gap-2 md:gap-10 justify-center">
+					<Button 
+						title="Drugs" 
+						onClick={() => handleTabChange("drug")} 
 					/>
-					<header className="text-3xl font-bold text-center">
-						News
-					</header>
-				</div>
-				<div className="flex flex-row gap-10 items-center justify-center">
-					<Button title="Drugs" imageClassName="h-[105%] w-[105%]" />
-					<Button
-						title="Cyber Bully"
-						imageClassName="h-[105%] w-[105%]"
-					/>
-					<Button title="Vape" imageClassName="h-[105%] w-[105%]" />
-					<Button
-						title="Heritage"
-						imageClassName="h-[105%] w-[105%]"
+					<Button 
+						title="Vape" 
+						onClick={() => handleTabChange("vape")} 
 					/>
 				</div>
-				<div className="flex flex-col gap-4 items-center">
-					<NewsItem
-						thumbnail={newsThumbnail}
-						title="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore, optio consequuntur."
-						newsLink="https://example.com/news"
-					/>
-					<NewsItem
-						thumbnail={newsThumbnail}
-						title="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore, optio consequuntur."
-						newsLink="https://example.com/news"
-					/>
-					<NewsItem
-						thumbnail={newsThumbnail}
-						title="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore, optio consequuntur."
-						newsLink="https://example.com/news"
-					/>
-					<NewsItem
-						thumbnail={newsThumbnail}
-						title="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore, optio consequuntur."
-						newsLink="https://example.com/news"
-					/>
+				<div className="flex flex-col gap-10 item-center">
+					{selectedCategory === "drug" && <NewsComponentDrug />}
+					{selectedCategory === "vape" && <NewsComponentVape />}
 				</div>
 			</div>
 		</div>
+		</QueryClientProvider>
 	);
 }
