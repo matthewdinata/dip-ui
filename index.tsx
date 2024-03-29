@@ -1,5 +1,3 @@
-import { Link, useNavigate } from "react-router-dom";
-
 const Button = ({
 	title,
 	link,
@@ -12,35 +10,38 @@ const Button = ({
 	imageClassName?: string;
 }) => {
 	return (
-		<Link to={link} className="button">
-			<button className="md:h-40 md:w-40 rounded-[1.5rem] bg-white border-solid border-red-500 hover:font-bold hover:border-red-500 hover:border-2 px-4">
-				<div className="button-text">
-					{thumbnailImage && (
-						<div className="image-container">
-							<img
-								className={imageClassName}
-								src={thumbnailImage}
-								alt={title} // Provide alt text for accessibility
-							/>
-						</div>
-					)}
-					<span className="text-red-500 text-2xl">{title}</span>
-				</div>
-			</button>
-		</Link>
+		<a
+      		href={link}
+      		target="_blank"
+      		rel="noopener noreferrer"
+      		className="button"
+    	>
+		<button className="md:h-40 md:w-40 bg-[#ca3735] hover:bg-[#ca37356e] text-center text-white hover:text-black min-w-[175px] hover:border-black px-4">
+			<div className="button-text">
+				{thumbnailImage && (
+					<div className="image-container">
+						<img
+							className={imageClassName}
+							src={thumbnailImage}
+							alt={title} // Provide alt text for accessibility
+						/>
+					</div>
+				)}
+				<span className="text-2xl">{title}</span>
+			</div>
+		</button>
+	</a>
 	);
 };
 
 export default function QuizPage() {
 	return (
-		<div className="min-h-screen">
-			<div className="pb-12 pt-12 pr-12 pl-12 md:pt-24 flex flex-col gap-16">
-				<div className="flex justify-center">
-					<div className="text-3xl md:text-5xl font-bold text-center">
-						Quiz Yourself!
-					</div>
+		<div className="flex h-full">
+			<div className="flex flex-col justify-center items-center gap-16 pt-24 m-auto">
+				<div className="text-3xl md:text-5xl font-bold text-center">
+					Quiz Yourself!
 				</div>
-				<div className="flex flex-wrap gap-10 justify-center">
+				<div className="flex flex-wrap justify-center gap-10 ">
 					<Button
 						title="Drugs"
 						link="https://docs.google.com/forms/d/e/1FAIpQLSfwytZYKTldmYdbptONKEuVoSguHkEqFgjhl99XhITs_CRvOw/viewform"
