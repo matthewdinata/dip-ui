@@ -1,5 +1,5 @@
 import { auth, db, GoogleProvider } from "@/services/firebase";
-import { signInWithPopup } from "firebase/auth";
+import { getRedirectResult, signInWithRedirect } from "firebase/auth";
 import {
 	doc,
 	DocumentData,
@@ -18,18 +18,23 @@ export default function useAuth() {
 
 	const login = async () => {
 		try {
-			const res = await signInWithPopup(auth, GoogleProvider);
-			// before making a new doc, check if doc already exists to prevent updating the old doc
-			const docRef = doc(db, "users", res.user.uid);
-			const docSnap = await getDoc(docRef);
-			if (!docSnap.exists()) {
-				await setDoc(doc(db, "users", res.user.uid), {
-					uid: res.user.uid,
-					email: res.user.email,
-					displayName: res.user.displayName,
-					profilePic: res.user.photoURL,
-					avatarId: 1,
-				});
+			await signInWithRedirect(auth, GoogleProvider);
+			const res = await getRedirectResult(auth);
+			if (res) {
+				// before making a new doc, check if doc already exists to prevent updating the old doc
+				const docRef = doc(db, "users", res.user.uid);
+				const docSnap = await getDoc(docRef);
+				if (!docSnap.exists()) {
+					await setDoc(doc(db, "users", res.user.uid), {
+						uid: res.user.uid,
+						email: res.user.email,
+						displayName: res.user.displayName,
+						profilePic: res.user.photoURL,
+						avatarId: 1,
+					});
+				}
+			} else {
+				throw new Error("Redirect result is null.");
 			}
 		} catch (error) {
 			console.error("Error signing in with Google: ", error);
