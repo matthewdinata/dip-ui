@@ -106,7 +106,7 @@ export default function ProfileModal({
 								<input
 									type="text"
 									id="school"
-									className="block bg-transparent w-full border border-solid border-gray-400 rounded-lg focus:border-red-800  focus:ring-red-800 transition-all sm:text-base px-4 py-2 text-ellipsis"
+									className="block bg-transparent w-full border border-solid border-gray-400 rounded-lg focus:border-red-800  focus:ring-red-800 transition-all sm:text-base px-4 py-2 text-ellipsis font-[Axiforma]"
 									placeholder="School"
 									required
 									value={school}
@@ -115,7 +115,7 @@ export default function ProfileModal({
 								<input
 									type="text"
 									id="grade"
-									className="block bg-transparent w-full border border-solid  border-gray-400 rounded-lg focus:border-red-800 focus:ring-red-800 transition-all sm:text-base px-4 py-2 text-ellipsis"
+									className="block bg-transparent w-full border border-solid  border-gray-400 rounded-lg focus:border-red-800 focus:ring-red-800 transition-all sm:text-base px-4 py-2 text-ellipsis font-[Axiforma]"
 									placeholder="Grade"
 									required
 									value={grade}
@@ -140,7 +140,7 @@ export default function ProfileModal({
 							<input
 								type="text"
 								id="email"
-								className="block bg-transparent w-full border border-solid border-gray-400 rounded-lg focus:border-red-800 focus:ring-red-800 transition-all sm:text-base px-4 py-2 cursor-not-allowed disabled:text-gray-500 text-ellipsis"
+								className="block bg-transparent w-full border border-solid border-gray-400 rounded-lg focus:border-red-800 focus:ring-red-800 transition-all sm:text-base px-4 py-2 cursor-not-allowed disabled:text-gray-500 text-ellipsis font-[Axiforma]"
 								placeholder="Email"
 								required
 								disabled
