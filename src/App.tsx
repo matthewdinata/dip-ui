@@ -12,6 +12,7 @@ import LandingPage from "./pages/LandingPage";
 import { ChatbotPage } from "./pages/ChatbotPage";
 import QuizPage from "./pages/QuizPage";
 import NewsPage from "./pages/NewsPage";
+import ArticlePage from "./pages/ArticlePage";
 import { ToastProvider } from "./context/ToastContext";
 import { ConfigProvider } from "antd";
 
@@ -44,6 +45,7 @@ function App() {
 								/>
 								<Route path="/quiz" element={<QuizPage />} />
 								<Route path="/news" element={<NewsPage />} />
+								<Route path="/news/article" element={<ArticlePage />} />
 							</Routes>
 						</div>
 					</Router>
