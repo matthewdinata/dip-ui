@@ -35,8 +35,6 @@ export const IFrameRenderer: FC<IFrameRendererProps> = ({ ...attributes }) => {
         ref={iframeRef}
         onLoad={handleIframeLoad}
         {...attributes}
-        width="1200px" 
-        height="550px"
       ></iframe>
     </>
   );
