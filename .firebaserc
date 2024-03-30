@@ -1,5 +1,6 @@
 {
   "projects": {
+    "dev": "ntu-eee-dip-e028-dev",
     "default": "ntu-eee-dip-e028",
     "prod": "ntu-eee-dip-e028"
   },

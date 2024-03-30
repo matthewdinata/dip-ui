@@ -1,7 +1,7 @@
 import { MultiLinkLayer } from "@/components/Layout";
 import { MockGameLinkDataTypes } from "@/types/linkToGame";
 // import { useState } from "react";
-
+// TODO: Use searchparams for this page. The routes were created so that it is easier to test
 const gameListData: MockGameLinkDataTypes[] = [{
     id: 1,
     title: "Heritage",
