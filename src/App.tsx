@@ -16,7 +16,7 @@ import { ToastProvider } from "./context/ToastContext";
 import { ConfigProvider } from "antd";
 // import { PuzzlesPage } from "./pages/PuzzlePage";
 import { CrosswordsPage } from "./pages/CrosswordPage";
-import { PuzzleRoutes } from "./pages/PuzzlePage/routes";
+import { PuzzlesPage } from "./pages/PuzzlePage";
 
 function App() {
 	return (
@@ -49,7 +49,7 @@ function App() {
 								<Route path="/news" element={<NewsPage />} />
 								<Route path="/crosswords" element={<CrosswordsPage />} />
 
-								<Route path="/puzzles/*" element={<PuzzleRoutes/>} />
+								<Route path="/puzzles/*" element={<PuzzlesPage/>} />
 							</Routes>
 						</div>
 					</Router>

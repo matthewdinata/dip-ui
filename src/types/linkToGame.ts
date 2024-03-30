@@ -13,10 +13,10 @@ export type LinkToGameType = {
     /**
      * The url for the game.
      */
-    url: string,
+    param: string,
 }
 
-export type MockGameLinkDataTypes = {
+export type MockGameDataTypes = {
     id:number,
     title:string,
     linkTo:LinkToGameType[],
