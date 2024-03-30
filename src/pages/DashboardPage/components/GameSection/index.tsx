@@ -47,12 +47,12 @@ export default function GameSection() {
 			urlPath: "/quiz",
 		},
 		{
-			title: "Be Drug ARware",
+			title: "Quiz Yourself",
 			thumbnailImage: quizThumbnail,
 			urlPath: "/quiz",
 		},
 		{
-			title: "Quiz Yourself!",
+			title: "Puzzles",
 			thumbnailImage: puzzleThumbnail,
 			urlPath: "/quiz",
 		},
