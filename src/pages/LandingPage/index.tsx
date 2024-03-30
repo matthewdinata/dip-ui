@@ -1,25 +1,22 @@
 // Utils
 import useAuth from "@/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 // Assets
 import appLogo from "@/assets/appLogo@3x.png";
 
 export default function LandingPage() {
-	const { user, login } = useAuth();
-	const [isLoading, setIsLoading] = useState(false);
+	const { user, login, loading } = useAuth();
 
 	// Handle navigation
 	const navigate = useNavigate();
 
 	const handleLogin = async () => {
-		setIsLoading(true);
 		if (!user) {
 			await login();
 		}
 		navigate("/dashboard");
-		setIsLoading(false);
 	};
 
 	useEffect(() => {
@@ -30,6 +27,9 @@ export default function LandingPage() {
 
 	return (
 		<>
+			{loading && (
+				<div className="opacity-50 bg-gray-200 w-full h-full z-10 top-0 left-0 fixed cursor-wait" />
+			)}
 			<div className="min-h-screen w-full flex flex-col items-center justify-center gap-24">
 				<div className="flex flex-col items-center gap-6">
 					<img
@@ -50,7 +50,7 @@ export default function LandingPage() {
 					<button
 						onClick={handleLogin}
 						className="bg-red-700 px-12 py-4 text-white text-lg hover:ring-transparent hover:border-transparent focus:ring-transparent focus:border-transparent focus:outline-none hover:bg-red-600 transition-all disabled:bg-gray-500 disabled:cursor-not-allowed"
-						disabled={isLoading || !!user}
+						disabled={loading || !!user}
 					>
 						Get Started! 🏁
 					</button>
