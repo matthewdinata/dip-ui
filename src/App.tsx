@@ -1,7 +1,15 @@
 import "./App.css";
 
 // Utils
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+	BrowserRouter as Router,
+	Routes,
+	Route,
+	Navigate,
+} from "react-router-dom";
+import { ToastProvider } from "./context/ToastContext";
+import { ConfigProvider } from "antd";
+import useAuth from "./hooks/useAuth";
 
 // Components
 import Navbar from "./components/Navbar";
@@ -12,11 +20,20 @@ import LandingPage from "./pages/LandingPage";
 import { ChatbotPage } from "./pages/ChatbotPage";
 import QuizPage from "./pages/QuizPage";
 import NewsPage from "./pages/NewsPage";
-import { ToastProvider } from "./context/ToastContext";
-import { ConfigProvider } from "antd";
+
 // import { PuzzlesPage } from "./pages/PuzzlePage";
 import { CrosswordsPage } from "./pages/CrosswordPage";
 import { PuzzlesPage } from "./pages/PuzzlePage";
+import ARwarePage from "./pages/ARwarePage";
+
+const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
+	const { user } = useAuth();
+	if (!user) {
+		return <Navigate to="/" replace />;
+	}
+
+	return children;
+};
 
 function App() {
 	return (
@@ -37,12 +54,66 @@ function App() {
 						<div className="mx-8">
 							<Routes>
 								<Route path="/" element={<LandingPage />} />
-								<Route path="/dashboard" element={<DashboardPage />} />
-								<Route path="/chatbot" element={<ChatbotPage />}/>
-								<Route path="/quiz" element={<QuizPage />} />
-								<Route path="/news" element={<NewsPage />} />
-								<Route path="/crosswords" element={<CrosswordsPage />} />
-								<Route path="/puzzles" element={<PuzzlesPage />} />
+								<Route
+									path="/dashboard"
+									element={
+										<ProtectedRoute>
+											<DashboardPage />
+										</ProtectedRoute>
+									}
+								/>
+								<Route
+									path="/chatbot"
+									element={
+										<ProtectedRoute>
+											<ChatbotPage />
+										</ProtectedRoute>
+									}
+								/>
+								<Route
+									path="/quiz"
+									element={
+										<ProtectedRoute>
+											<QuizPage />
+										</ProtectedRoute>
+									}
+								/>
+								<Route
+									path="/news"
+									element={
+										<ProtectedRoute>
+											<NewsPage />
+										</ProtectedRoute>
+									}
+								/>
+								<Route
+									path="/puzzles"
+									element={
+										<ProtectedRoute>
+											<PuzzlesPage />
+										</ProtectedRoute>
+									}
+								/>
+								<Route
+									path="/crosswords"
+									element={
+										<ProtectedRoute>
+											<CrosswordsPage />
+										</ProtectedRoute>
+									}
+								/>
+								<Route
+									path="/arware"
+									element={
+										<ProtectedRoute>
+											<ARwarePage />
+										</ProtectedRoute>
+									}
+								/>
+								<Route
+									path="*"
+									element={<Navigate to="/" replace />}
+								/>
 							</Routes>
 						</div>
 					</Router>

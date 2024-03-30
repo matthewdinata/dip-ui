@@ -39,7 +39,7 @@ export default function GameSection() {
 		{
 			title: "Be Drug ARware",
 			thumbnailImage: arThumbnail,
-			urlPath: "/quiz",
+			urlPath: "/arware",
 		},
 		{
 			title: "Find the Symptoms",
@@ -47,7 +47,7 @@ export default function GameSection() {
 			urlPath: "/crosswords",
 		},
 		{
-			title: "Be Drug ARware",
+			title: "Quiz Yourself",
 			thumbnailImage: quizThumbnail,
 			urlPath: "/quiz",
 		},
@@ -75,12 +75,6 @@ export default function GameSection() {
 						/>
 					);
 				})}
-			</div>
-			<div className="text-center md:text-base sm:text-sm text-xs">
-				You recently played{" "}
-				<span className="underline text-red-800 font-medium cursor-pointer">
-					Crossword
-				</span>
 			</div>
 		</div>
 	);

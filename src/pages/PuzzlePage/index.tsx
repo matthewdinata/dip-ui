@@ -15,7 +15,7 @@ const gameListData: MockGameDataTypes[] = [{
         },
         {
             id: 2,
-            title: "Singapore Time Trivia Match Theme Up",
+            title: "Singapore Time Trivia Match Them Up",
             param: "timeTrivia"
         }
     ]

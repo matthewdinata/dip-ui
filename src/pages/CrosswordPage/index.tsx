@@ -29,7 +29,7 @@ const gameListData: MockGameDataTypes[] = [{
         linkTo: [
             {
                 id:1,
-                title:"Vape Quest: Unsramble and Learn",
+                title:"Vape Quest: Unscramble and Learn",
                 param: "vapeQuest"
             }
         ]
