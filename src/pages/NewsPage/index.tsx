@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
 import { useParams } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 // Define a QueryClient instance
 const queryClient = new QueryClient();
@@ -22,6 +23,19 @@ const Button = ({
 	);
 };
 
+const ArticlePage = () => {
+	// Retrieve the URL and news content from the URL parameters
+	const { url, newsContent } = useParams<{ url: string; newsContent: string }>();
+  
+	return (
+	  <div>
+		<h2>News Article</h2>
+		<p>URL: {decodeURIComponent(url)}</p>
+		<p>Content: {decodeURIComponent(newsContent)}</p>
+	  </div>
+	);
+};
+
 interface NewsItemProps {
 	title: string;
 	urlToImage: string;
@@ -38,7 +52,7 @@ const NewsItem: React.FC<NewsItemProps> = ({ title, urlToImage, url, publishedAt
 		);
 		const newsContent = await response.text();
 	
-		window.location.href = `/news/article?url=${url}&content=${newsContent}`;
+		Navigate(`/news/article?url=${url}&content=${newsContent}`);
 	}
 	return (
 		<div className="flex flex-col px-2 md:flex-row item-center md:pl-20 md:pr-20 md:pt-8 md:mt-3 md:mb-3 md:border md:border-solid border-red-300 rounded-3xl">
