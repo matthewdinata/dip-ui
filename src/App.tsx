@@ -21,7 +21,6 @@ import { ChatbotPage } from "./pages/ChatbotPage";
 import QuizPage from "./pages/QuizPage";
 import NewsPage from "./pages/NewsPage";
 
-// import { PuzzlesPage } from "./pages/PuzzlePage";
 import { CrosswordsPage } from "./pages/CrosswordPage";
 import { PuzzlesPage } from "./pages/PuzzlePage";
 import ARwarePage from "./pages/ARwarePage";

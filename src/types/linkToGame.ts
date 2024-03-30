@@ -14,10 +14,11 @@ export type LinkToGameType = {
      * The url for the game.
      */
     param: string,
+    component: JSX.Element,
 }
 
 export type MockGameDataTypes = {
     id:number,
-    title:string,
+    category:string,
     linkTo:LinkToGameType[],
 }

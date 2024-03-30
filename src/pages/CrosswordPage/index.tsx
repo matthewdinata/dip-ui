@@ -8,29 +8,32 @@ import { VapeQuestFrame } from "./components/VapeQuest";
 
 const gameListData: MockGameDataTypes[] = [{
     id: 1,
-    title: "Cyber Bully",
+    category: "Cyber Bully",
     linkTo: [
         {
             id: 1,
             title: "CyberSafe Crosswords",
-            param: "cyberSafeCrosswords"
+            param: "cyberSafeCrosswords",
+            component: <CyberSafeCrosswordsFrame />,
         },
         {
             id: 2,
             title: "Cyber Word Hunt",
-            param: "cyberWordHunt"
+            param: "cyberWordHunt",
+            component: <CyberWordHunterFrame />,
         }
     ]
     // Append more into this data if there is more games being created
     },
     {
         id:2,
-        title: "Vape",
+        category: "Vape",
         linkTo: [
             {
                 id:1,
                 title:"Vape Quest: Unscramble and Learn",
-                param: "vapeQuest"
+                param: "vapeQuest",
+                component: <VapeQuestFrame />,
             }
         ]
     }
@@ -44,19 +47,22 @@ export const CrosswordsPage = () => {
 
     // get the value of ?game=...
     const gameParams = searchParams.get('game');
-    console.log(gameParams);
+    const categoryParams = searchParams.get('category');
+
+    // Filter game category array according to categoryParams
+    const filteredGame = gameListData.find(game => game.category === categoryParams);
+    // Filter the game's linkTo array according to gameParams
+    const filteredComponent = filteredGame?.linkTo.find(link => link.param == gameParams);
+    
     return (
         <div className="w-full flex overflow-hidden min-w-[200px]">
-            {gameParams === "cyberSafeCrosswords" && <CyberSafeCrosswordsFrame />}
-            {gameParams === "cyberWordHunt" && <CyberWordHunterFrame />}
-            {gameParams === "vapeQuest" && <VapeQuestFrame />}
-
+            {filteredComponent?.component}
             {!gameParams && 
             <div className="h-full flex flex-col text-center gap-12 md:gap-28 mx-auto py-16">
                 <h1>Puzzle</h1>
 
                 <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-                    {gameListData.map((data) => <MultiLinkLayer key={data.id} title={data.title} linkToArray={data.linkTo} setSearchParams={setSearchParams} />)}
+                    {gameListData.map((data) => <MultiLinkLayer key={data.id} category={data.category} linkToArray={data.linkTo} setSearchParams={setSearchParams} />)}
                 </div>
             </div>}
         </div>
