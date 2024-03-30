@@ -39,7 +39,7 @@ export default function GameSection() {
 		{
 			title: "Be Drug ARware",
 			thumbnailImage: arThumbnail,
-			urlPath: "/quiz",
+			urlPath: "/arware",
 		},
 		{
 			title: "Find the Symptoms",

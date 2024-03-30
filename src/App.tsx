@@ -2,6 +2,8 @@ import "./App.css";
 
 // Utils
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ToastProvider } from "./context/ToastContext";
+import { ConfigProvider } from "antd";
 
 // Components
 import Navbar from "./components/Navbar";
@@ -12,8 +14,7 @@ import LandingPage from "./pages/LandingPage";
 import { ChatbotPage } from "./pages/ChatbotPage";
 import QuizPage from "./pages/QuizPage";
 import NewsPage from "./pages/NewsPage";
-import { ToastProvider } from "./context/ToastContext";
-import { ConfigProvider } from "antd";
+import ARwarePage from "./pages/ARwarePage";
 
 function App() {
 	return (
@@ -44,6 +45,10 @@ function App() {
 								/>
 								<Route path="/quiz" element={<QuizPage />} />
 								<Route path="/news" element={<NewsPage />} />
+								<Route
+									path="/arware"
+									element={<ARwarePage />}
+								/>
 							</Routes>
 						</div>
 					</Router>
