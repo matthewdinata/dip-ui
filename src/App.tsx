@@ -37,19 +37,12 @@ function App() {
 						<div className="mx-8">
 							<Routes>
 								<Route path="/" element={<LandingPage />} />
-								<Route
-									path="/dashboard"
-									element={<DashboardPage />}
-								/>
-								<Route
-									path="/chatbot"
-									element={<ChatbotPage />}
-								/>
+								<Route path="/dashboard" element={<DashboardPage />} />
+								<Route path="/chatbot" element={<ChatbotPage />}/>
 								<Route path="/quiz" element={<QuizPage />} />
 								<Route path="/news" element={<NewsPage />} />
 								<Route path="/crosswords" element={<CrosswordsPage />} />
-
-								<Route path="/puzzles/*" element={<PuzzlesPage/>} />
+								<Route path="/puzzles" element={<PuzzlesPage />} />
 							</Routes>
 						</div>
 					</Router>
