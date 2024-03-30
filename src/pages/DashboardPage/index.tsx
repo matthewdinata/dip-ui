@@ -6,9 +6,18 @@ import ChatbotSection from "./components/ChatbotSection";
 // Utils
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "@/services/firebase";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function DashboardPage() {
 	const [user] = useAuthState(auth);
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		if (!user) {
+			navigate("/");
+		}
+	}, [user, navigate]);
 
 	return (
 		<div className="min-h-screen">

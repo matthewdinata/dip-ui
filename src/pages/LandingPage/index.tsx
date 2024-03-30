@@ -22,7 +22,7 @@ export default function LandingPage() {
 		if (user) {
 			navigate("/dashboard");
 		}
-	});
+	}, [user, navigate]);
 
 	return (
 		<>

@@ -29,9 +29,10 @@ export default function Navbar() {
 		navigate("/");
 	};
 
+	console.log(pathname);
 	return (
 		<div className="w-full h-12 bg-white drop-shadow-md grid grid-cols-3 gap-x-4 items-center px-4">
-			{pathname === "/dashboard" ? (
+			{pathname === "/dashboard" || pathname === "/" ? (
 				<></>
 			) : (
 				<div
