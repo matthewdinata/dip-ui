@@ -1,7 +1,6 @@
 // Utils
 import useAuth from "@/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 
 // Assets
 import appLogo from "@/assets/appLogo@3x.png";
@@ -17,12 +16,6 @@ export default function LandingPage() {
 		}
 		navigate("/dashboard");
 	};
-
-	useEffect(() => {
-		if (user) {
-			navigate("/dashboard");
-		}
-	}, [user, navigate]);
 
 	return (
 		<>
