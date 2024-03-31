@@ -29,7 +29,7 @@ const ArticlePage = () => {
 					className="flex justify-center h-auto w-full"
 				/>
         <h3>Published at: {publishedAt.split('T')[0]}</h3>
-        <p className="text-base md:text-2xl text-justify">{parsedContent?.news_article}</p>
+        <p className="text-base md:text-2xl text-justify" style={{ lineHeight: '2' }}>{parsedContent?.news_article}</p>
       </div>
     </div>
   );
