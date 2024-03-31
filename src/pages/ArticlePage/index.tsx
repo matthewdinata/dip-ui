@@ -1,36 +1,32 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
-import { useQuery } from 'react-query';
-import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
-interface ArticlePageProps {
-  title: string;
-  urlToImage: string;
-  url: string;
-  publishedAt: string;
-}
+const ArticlePage = () => {
+  const location: Location = useLocation();
+  const queryParams: URLSearchParams = new URLSearchParams(location.search);
+  const title: string = queryParams.get("title") || "";
+  const urlToImage: string = queryParams.get("urlToImage") || "";
+  const publishedAt: string = queryParams.get("publishedAt") || "";
 
-const ArticlePage: React.FC<ArticlePageProps> = ({ title, urlToImage, url, publishedAt }) => {
-  const navigate = useNavigate();
+  const newsContent: string | null = queryParams.get("content");
+  const parsedContent: ParsedContentType = newsContent ? JSON.parse(newsContent) : null;
 
-  const openNewsPage = async (event: React.MouseEvent<HTMLAnchorElement>) => {
-    event.preventDefault();
-    // Fetch the news content from the provided URL
-    const response = await fetch('https://asia-southeast2-ntu-eee-dip-e028.cloudfunctions.net/dip-backend-functions/fetch_article?url=' + encodeURIComponent(url));
-    const newsContent = await response.text();
-
-    // Navigate to the news article page with URL and content parameters
-    navigate(`/news/article?url=${encodeURIComponent(url)}&content=${encodeURIComponent(newsContent)}`);
-  };
-
-  const { title, urlToImage, url, newsContent } = useParams<{ title: string; urlToImage: string; url: string; newsContent: string }>();
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scroll to the top of the page when component mounts
+  }, []);
+  
   return (
-    <div>
-      <h2>News Article</h2>
-      <p>URL: {encodeURIComponent(url)}</p>
-      <p>{title}</p>
-      <p>{urlToImage}</p>
-      <p>Content: {encodeURIComponent(newsContent)}</p>
+    <div className="min-h-screen">
+			<div className="flex flex-col pb-12 pt-8 px-4 md:pb-12 md:pt-24 md:px-20 gap-8">
+				<div className="text-3xl md:text-5xl font-bold text-center md:text-center">{title}</div>
+        <img
+					src={urlToImage}
+					alt={title}
+					className="flex justify-center h-auto w-full"
+				/>
+        <h3>Published at: {publishedAt.split('T')[0]}</h3>
+        <p className="text-base md:text-2xl text-justify">{parsedContent?.news_article}</p>
+      </div>
     </div>
   );
 };
