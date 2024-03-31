@@ -20,6 +20,9 @@ import LandingPage from "./pages/LandingPage";
 import { ChatbotPage } from "./pages/ChatbotPage";
 import QuizPage from "./pages/QuizPage";
 import NewsPage from "./pages/NewsPage";
+
+import { CrosswordsPage } from "./pages/CrosswordPage";
+import { PuzzlesPage } from "./pages/PuzzlePage";
 import ARwarePage from "./pages/ARwarePage";
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
@@ -79,6 +82,22 @@ function App() {
 									element={
 										<ProtectedRoute>
 											<NewsPage />
+										</ProtectedRoute>
+									}
+								/>
+								<Route
+									path="/puzzles"
+									element={
+										<ProtectedRoute>
+											<PuzzlesPage />
+										</ProtectedRoute>
+									}
+								/>
+								<Route
+									path="/crosswords"
+									element={
+										<ProtectedRoute>
+											<CrosswordsPage />
 										</ProtectedRoute>
 									}
 								/>
