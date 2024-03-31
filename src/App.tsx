@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 import { ToastProvider } from "./context/ToastContext";
 import { ConfigProvider } from "antd";
+import { QueryClient, QueryClientProvider } from 'react-query';
 import useAuth from "./hooks/useAuth";
 
 // Components
@@ -35,97 +36,102 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
 };
 
 function App() {
+	const queryClient = new QueryClient();
 	return (
 		<div>
-			<ConfigProvider
-				theme={{
-					token: {
-						fontFamily:
-							"Axiforma, Inter, Avenir, Helvetica, Arial, sans-serif",
-					},
-				}}
-			>
-				<ToastProvider>
-					<Router>
-						<div className="sticky top-0 z-50">
-							<Navbar />
-						</div>
-						<div className="mx-8">
-							<Routes>
-								<Route path="/" element={<LandingPage />} />
-								<Route
-									path="/dashboard"
-									element={
-										<ProtectedRoute>
-											<DashboardPage />
-										</ProtectedRoute>
-									}
-								/>
-								<Route
-									path="/chatbot"
-									element={
-										<ProtectedRoute>
-											<ChatbotPage />
-										</ProtectedRoute>
-									}
-								/>
-								<Route
-									path="/quiz"
-									element={
-										<ProtectedRoute>
-											<QuizPage />
-										</ProtectedRoute>
-									}
-								/>
-								<Route
-									path="/news"
-									element={
-										<ProtectedRoute>
-											<NewsPage />
-										</ProtectedRoute>
-									}
-								/>
-								<Route 
-									path="/news/article" 
-									element={
-										<ProtectedRoute>
-											<ArticlePage />
-										</ProtectedRoute>  
-									} 
-								/>
-								<Route
-									path="/puzzles"
-									element={
-										<ProtectedRoute>
-											<PuzzlesPage />
-										</ProtectedRoute>
-									}
-								/>
-								<Route
-									path="/crosswords"
-									element={
-										<ProtectedRoute>
-											<CrosswordsPage />
-										</ProtectedRoute>
-									}
-								/>
-								<Route
-									path="/arware"
-									element={
-										<ProtectedRoute>
-											<ARwarePage />
-										</ProtectedRoute>
-									}
-								/>
-								<Route
-									path="*"
-									element={<Navigate to="/" replace />}
-								/>
-							</Routes>
-						</div>
-					</Router>
-				</ToastProvider>
-			</ConfigProvider>
+			<QueryClientProvider client={queryClient}>
+
+				<ConfigProvider
+					theme={{
+						token: {
+							fontFamily:
+								"Axiforma, Inter, Avenir, Helvetica, Arial, sans-serif",
+						},
+					}}
+				>
+					<ToastProvider>
+						<Router>
+							<div className="sticky top-0 z-50">
+								<Navbar />
+							</div>
+							<div className="mx-8">
+								<Routes>
+									<Route path="/" element={<LandingPage />} />
+									<Route
+										path="/dashboard"
+										element={
+											<ProtectedRoute>
+												<DashboardPage />
+											</ProtectedRoute>
+										}
+									/>
+									<Route
+										path="/chatbot"
+										element={
+											<ProtectedRoute>
+												<ChatbotPage />
+											</ProtectedRoute>
+										}
+									/>
+									<Route
+										path="/quiz"
+										element={
+											<ProtectedRoute>
+												<QuizPage />
+											</ProtectedRoute>
+										}
+									/>
+									<Route
+										path="/news"
+										element={
+											<ProtectedRoute>
+												<NewsPage />
+											</ProtectedRoute>
+										}
+									/>
+									<Route
+										path="/news/article"
+										element={
+											<ProtectedRoute>
+												<ArticlePage />
+											</ProtectedRoute>
+										}
+									/>
+									<Route
+										path="/puzzles"
+										element={
+											<ProtectedRoute>
+												<PuzzlesPage />
+											</ProtectedRoute>
+										}
+									/>
+									<Route
+										path="/crosswords"
+										element={
+											<ProtectedRoute>
+												<CrosswordsPage />
+											</ProtectedRoute>
+										}
+									/>
+									<Route
+										path="/arware"
+										element={
+											<ProtectedRoute>
+												<ARwarePage />
+											</ProtectedRoute>
+										}
+									/>
+									<Route
+										path="*"
+										element={<Navigate to="/" replace />}
+									/>
+								</Routes>
+							</div>
+						</Router>
+					</ToastProvider>
+				</ConfigProvider>
+			</QueryClientProvider>
+
 		</div>
 	);
 }

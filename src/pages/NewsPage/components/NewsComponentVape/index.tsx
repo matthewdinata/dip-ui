@@ -1,7 +1,7 @@
 import { useQuery } from 'react-query';
-import { NewsItem } from 'src/pages/NewsPage/components/NewsItem'
-import { NewsItemProps } from 'src/pages/NewsPage/types'
 import { fetchNews } from '@/api'
+import { NewsItem } from '../NewsItem';
+import { NewsItemProps } from '../../types';
 
 export const NewsComponentVape: React.FC = () => {
 	// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
