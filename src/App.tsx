@@ -21,8 +21,6 @@ import { ChatbotPage } from "./pages/ChatbotPage";
 import QuizPage from "./pages/QuizPage";
 import NewsPage from "./pages/NewsPage";
 import ArticlePage from "./pages/ArticlePage";
-import { ToastProvider } from "./context/ToastContext";
-import { ConfigProvider } from "antd";
 import ARwarePage from "./pages/ARwarePage";
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
@@ -85,6 +83,14 @@ function App() {
 										</ProtectedRoute>
 									}
 								/>
+								<Route 
+									path="/news/article" 
+									element={
+										<ProtectedRoute>
+											<ArticlePage />
+										</ProtectedRoute>  
+									} 
+								/>
 								<Route
 									path="/arware"
 									element={
@@ -97,22 +103,6 @@ function App() {
 									path="*"
 									element={<Navigate to="/" replace />}
 								/>
-								<Route 
-                  path="/news" 
-                  element={
-                    <ProtectedRoute>
-                      <NewsPage />
-                    </ProtectedRoute>  
-                  } 
-                 />
-                 <Route 
-                   path="/news/article" 
-                   element={
-                    <ProtectedRoute>
-                      <ArticlePage />
-                    </ProtectedRoute>  
-                   } 
-                 />
 							</Routes>
 						</div>
 					</Router>
