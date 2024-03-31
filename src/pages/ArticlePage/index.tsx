@@ -6,7 +6,7 @@ interface ParsedContentType {
 }
 
 const ArticlePage = () => {
-  const location: Location = useLocation();
+  const location = useLocation();
   const queryParams: URLSearchParams = new URLSearchParams(location.search);
   const title: string = queryParams.get("title") || "";
   const urlToImage: string = queryParams.get("urlToImage") || "";
