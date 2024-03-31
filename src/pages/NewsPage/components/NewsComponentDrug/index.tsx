@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
-import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
+import { useQuery } from 'react-query';
+import { NewsItem } from '../NewsItem'
+import { NewsItemProps } from './Types'
+import { fetchNews } from '@/api'
 
 export const NewsComponentDrug: React.FC = () => {
 	// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
