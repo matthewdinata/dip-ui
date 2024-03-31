@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
 
-const NewsComponentDrug: React.FC = () => {
+export const NewsComponentDrug: React.FC = () => {
 	// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 	const { data, isLoading, isError } = useQuery('drug', () => fetchNews('drug', '2024-03-29')) || {};
 
