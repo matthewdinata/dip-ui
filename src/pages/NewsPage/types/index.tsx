@@ -1,4 +1,4 @@
-export const interface NewsItemProps {
+export interface NewsItemProps {
 	title: string;
 	urlToImage: string;
 	url: string;
