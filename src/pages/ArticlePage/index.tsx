@@ -1,6 +1,10 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
+interface ParsedContentType {
+  news_article: string;
+}
+
 const ArticlePage = () => {
   const location: Location = useLocation();
   const queryParams: URLSearchParams = new URLSearchParams(location.search);
@@ -9,7 +13,7 @@ const ArticlePage = () => {
   const publishedAt: string = queryParams.get("publishedAt") || "";
 
   const newsContent: string | null = queryParams.get("content");
-  const parsedContent: ParsedContentType = newsContent ? JSON.parse(newsContent) : null;
+  const parsedContent: ParsedContentType | null = newsContent ? JSON.parse(newsContent) as ParsedContentType : null;
 
   useEffect(() => {
     window.scrollTo(0, 0); // Scroll to the top of the page when component mounts
