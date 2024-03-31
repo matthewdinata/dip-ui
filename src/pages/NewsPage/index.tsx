@@ -1,115 +1,51 @@
-import React from "react";
+import { useState } from 'react';
+import { NewsComponentDrug } from './components/NewsComponentDrug';
+import { NewsComponentVape } from './components/NewsComponentVape';
 
-// Assets
-import { IoIosArrowBack } from "react-icons/io";
-import newsThumbnail from "@/assets/newsThumbnail@3x.png";
+// Define a QueryClient instance
 
-// Constants - utils
-import { useNavigate } from "react-router-dom";
 
 const Button = ({
 	title,
-	thumbnailImage,
-	imageClassName,
+	onClick,
 }: {
 	title: string;
-	thumbnailImage?: string;
-	imageClassName?: string;
+	onClick: () => void;
 }) => {
 	return (
-		<button className="h-14 w-48 rounded-[1.5rem] text-xl text-red-500 bg-white border border-red-500 hover:font-bold hover:border-red-500 hover:border-2 px-4">
+		<button 
+			className="w-36 md:h-14 md:w-48 rounded-[1.5rem] text-sm md:text-2xl bg-[#ca3735] hover:bg-[#ca37356e] text-center text-white hover:text-black hover:border-black px-4"
+			onClick={onClick}
+		>
 			<div className="button-text">{title}</div>
-			{thumbnailImage && (
-				<div className="image-container">
-					<img
-						className={imageClassName}
-						src={thumbnailImage}
-						alt={title} // Provide alt text for accessibility
-					/>
-				</div>
-			)}
 		</button>
 	);
 };
 
-interface NewsItemProps {
-	thumbnail: string;
-	title: string;
-	newsLink: string;
-}
-const NewsItem: React.FC<NewsItemProps> = ({ thumbnail, title, newsLink }) => {
-	return (
-		<div className="flex items-center justify-between p-4 border-solid border-red-200 hover:border-2 rounded-3xl px-4">
-			{/* Thumbnail */}
-			<div className="flex-shrink-0 mr-4 rounded-md">
-				<img
-					src={thumbnail}
-					alt={title}
-					className="w-56 h-32 rounded-3xl mr-4"
-				/>
-			</div>
-
-			{/* Title and Link */}
-			<div className="flex-grow border rounded-md p-2">
-				<h2 className="text-lg font-semibold">{title}</h2>
-				<a href={newsLink} className="text-blue-500 hover:underline">
-					Read more
-				</a>
-			</div>
-		</div>
-	);
-};
-
 export default function NewsPage() {
-	const navigate = useNavigate();
-	const handleNavigateToDashboardPage = () => {
-		navigate("/dashboard");
+	const [selectedCategory, setSelectedCategory] = useState("drug");
+
+	const handleTabChange = (category: string) => {
+		setSelectedCategory(category);
 	};
+
 	return (
 		<div className="min-h-screen">
-			<div className="mb-12 mt-24 flex flex-col gap-4">
-				<div className="flex justify-center relative">
-					<IoIosArrowBack
-						className="text-3xl absolute left-0"
-						onClick={handleNavigateToDashboardPage}
+			<div className="pb-12 pt-8 xl:pb-12 xl:pt-24 flex flex-col gap-8">
+				<div className="text-3xl xl:text-5xl font-bold text-center xl:text-center">News</div>
+				<div className="flex flex-row gap-2 xl:gap-10 justify-center">
+					<Button 
+						title="Drugs" 
+						onClick={() => handleTabChange("drug")} 
 					/>
-					<header className="text-3xl font-bold text-center">
-						News
-					</header>
-				</div>
-				<div className="flex flex-row gap-10 items-center justify-center">
-					<Button title="Drugs" imageClassName="h-[105%] w-[105%]" />
-					<Button
-						title="Cyber Bully"
-						imageClassName="h-[105%] w-[105%]"
-					/>
-					<Button title="Vape" imageClassName="h-[105%] w-[105%]" />
-					<Button
-						title="Heritage"
-						imageClassName="h-[105%] w-[105%]"
+					<Button 
+						title="Vape" 
+						onClick={() => handleTabChange("vape")} 
 					/>
 				</div>
-				<div className="flex flex-col gap-4 items-center">
-					<NewsItem
-						thumbnail={newsThumbnail}
-						title="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore, optio consequuntur."
-						newsLink="https://example.com/news"
-					/>
-					<NewsItem
-						thumbnail={newsThumbnail}
-						title="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore, optio consequuntur."
-						newsLink="https://example.com/news"
-					/>
-					<NewsItem
-						thumbnail={newsThumbnail}
-						title="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore, optio consequuntur."
-						newsLink="https://example.com/news"
-					/>
-					<NewsItem
-						thumbnail={newsThumbnail}
-						title="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Labore, optio consequuntur."
-						newsLink="https://example.com/news"
-					/>
+				<div className="flex flex-col gap-10 item-center">
+					{selectedCategory === "drug" && <NewsComponentDrug />}
+					{selectedCategory === "vape" && <NewsComponentVape />}
 				</div>
 			</div>
 		</div>
