@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query';
-import { NewsItem } from '../NewsItem'
-import { NewsItemProps } from './Types'
+import { NewsItem } from 'src/pages/NewsPage/components/NewsItem'
+import { NewsItemProps } from 'src/pages/NewsPage/types'
 import { fetchNews } from '@/api'
 
 export const NewsComponentDrug: React.FC = () => {
