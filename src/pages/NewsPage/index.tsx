@@ -69,7 +69,7 @@ const NewsItem: React.FC<NewsItemProps> = ({ title, urlToImage, url, publishedAt
 	);
 };
 
-//Line 83-142 are News Fetching
+//Line 72-131 are News Fetching
 const fetchNews = async (topic: string, current_date: string) => {
 	const response = await fetch(`https://asia-southeast2-ntu-eee-dip-e028.cloudfunctions.net/dip-backend-functions/fetch_metadata?topic=${topic}&current_date=${current_date}`);
 	if (!response.ok) {
@@ -79,6 +79,7 @@ const fetchNews = async (topic: string, current_date: string) => {
 };
   
 const NewsComponentDrug: React.FC = () => {
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 	const { data, isLoading, isError } = useQuery('drug', () => fetchNews('drug', '2024-03-29')) || {};
 
 	if (isLoading) {
@@ -91,6 +92,7 @@ const NewsComponentDrug: React.FC = () => {
 
 	return (
 		<div>
+		{/* eslint-disable-next-line */}
 		{data && data?.metadata.map((article: NewsItemProps) => (
 			<NewsItem
 			key={article.url}
@@ -105,6 +107,7 @@ const NewsComponentDrug: React.FC = () => {
 };
   
 const NewsComponentVape: React.FC = () => {
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 	const { data, isLoading, isError } = useQuery('vape', () => fetchNews('vape', '2024-03-29')) || {};
 
 	if (isLoading) {
@@ -115,8 +118,9 @@ const NewsComponentVape: React.FC = () => {
 		return <div>Error: Failed to fetch news</div>;
 	}
 
-	return (
+	return (	 
 		<div>
+		{/* eslint-disable-next-line */}
 		{data && data?.metadata.map((article: NewsItemProps) => (
 			<NewsItem
 			key={article.url}
