@@ -7,21 +7,18 @@ export default function Button({
   thumbnailImage,
   imageClassName,
   extraButtonClassName,
-  titleClassName,
 }: {
   title: string;
   link: string;
   thumbnailImage?: string;
   imageClassName?: string;
   extraButtonClassName?: string;
-  titleClassName?: string
 }) {
   return (
     <Link
       to={link}
     >
-      <button className={`h-40 w-40 rounded-[1.5rem] bg-white border border-red-500 hover:font-bold hover:border-red-500 hover:border-2 px-4 ${extraButtonClassName}`}>
-        <div className='button-text'>
+      <button className={`h-40 w-40 rounded-[1.5rem] text-2xl bg-white border border-red-500 hover:font-bold hover:border-red-500 hover:border-2 px-4 ${extraButtonClassName}`}>
           {thumbnailImage && (
             <div className='image-container'>
               <img
@@ -31,8 +28,7 @@ export default function Button({
               />
             </div>
           )}
-          <span className={`text-red-500 text-2xl ${titleClassName}`}>{title}</span>
-        </div>
+          {title}
       </button>
     </Link>
   );
