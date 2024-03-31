@@ -1,12 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
-const interface NewsItemProps {
-	title: string;
-	urlToImage: string;
-	url: string;
-	publishedAt: string;
-}
+import { NewsItemProps } from './Types'
 
 export const NewsItem: React.FC<NewsItemProps> = ({ title, urlToImage, url, publishedAt}) => {
 	const navigate = useNavigate(); // Initialize useNavigate hook
