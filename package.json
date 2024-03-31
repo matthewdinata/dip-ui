@@ -9,7 +9,7 @@
 		"lint": "eslint . --report-unused-disable-directives --fix --max-warnings=0",
 		"preview": "vite preview",
 		"prepare": "husky install",
-		"deploy":"env-cmd -f .env npm run build && firebase deploy -P prod"
+		"deploy:dev":"env-cmd -f .env.dev npm run build && firebase use dev && firebase deploy --only hosting"
 	},
 	"dependencies": {
 		"@tanstack/react-query": "^5.25.0",

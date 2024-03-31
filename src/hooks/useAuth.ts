@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 
 export default function useAuth() {
-	const [user] = useAuthState(auth);
+	const [user, loading] = useAuthState(auth);
 	const [userInfo, setUserInfo] = useState<DocumentData | undefined>(
 		undefined
 	);
@@ -82,5 +82,5 @@ export default function useAuth() {
 		}
 	};
 
-	return { user, userInfo, login, logout, updateUserData };
+	return { user, userInfo, login, logout, updateUserData, loading };
 }
