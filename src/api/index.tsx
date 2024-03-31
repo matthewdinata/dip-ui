@@ -1,5 +1,5 @@
 export const fetchNews = async (topic: string, current_date: string) => {
-	const response = await fetch(`https://asia-southeast2-ntu-eee-dip-e028.cloudfunctions.net/dip-backend-functions/fetch_metadata?topic=${topic}&current_date=${current_date}`);
+	const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/fetch_metadata?topic=${topic}&current_date=${current_date}`);
 	if (!response.ok) {
 		throw new Error('Failed to fetch news');
 	}
