@@ -19,12 +19,12 @@ import Navbar from "./components/Navbar";
 import DashboardPage from "./pages/DashboardPage";
 import LandingPage from "./pages/LandingPage";
 import { ChatbotPage } from "./pages/ChatbotPage";
-import QuizPage from "./pages/QuizPage";
 import NewsPage from "./pages/NewsPage";
 import ArticlePage from "./pages/ArticlePage";
 import { CrosswordsPage } from "./pages/CrosswordPage";
 import { PuzzlesPage } from "./pages/PuzzlePage";
 import ARwarePage from "./pages/ARwarePage";
+import { QuizRoutes } from "./pages/QuizPage/routes";
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
 	const { user } = useAuth();
@@ -74,10 +74,10 @@ function App() {
 										}
 									/>
 									<Route
-										path="/quiz"
+										path="/quiz/*"
 										element={
 											<ProtectedRoute>
-												<QuizPage />
+												<QuizRoutes />
 											</ProtectedRoute>
 										}
 									/>
