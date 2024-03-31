@@ -6,18 +6,21 @@ export default function Button({
   link,
   thumbnailImage,
   imageClassName,
+  extraButtonClassName,
+  titleClassName,
 }: {
   title: string;
   link: string;
   thumbnailImage?: string;
   imageClassName?: string;
+  extraButtonClassName?: string;
+  titleClassName?: string
 }) {
   return (
     <Link
       to={link}
-      className='button'
     >
-      <button className='h-40 w-40 rounded-[1.5rem] bg-white border border-red-500 hover:font-bold hover:border-red-500 hover:border-2 px-4'>
+      <button className={`h-40 w-40 rounded-[1.5rem] bg-white border border-red-500 hover:font-bold hover:border-red-500 hover:border-2 px-4 ${extraButtonClassName}`}>
         <div className='button-text'>
           {thumbnailImage && (
             <div className='image-container'>
@@ -28,7 +31,7 @@ export default function Button({
               />
             </div>
           )}
-          <span className='text-red-500 text-2xl'>{title}</span>
+          <span className={`text-red-500 text-2xl ${titleClassName}`}>{title}</span>
         </div>
       </button>
     </Link>
@@ -36,8 +39,8 @@ export default function Button({
 }
 
 // Todo: Enable selection of different colors
-export const CustomRedButton = ({title, ...attributes}:CustomRedButtonProps) => {
-  return(
+export const CustomRedButton = ({ title, ...attributes }: CustomRedButtonProps) => {
+  return (
     <button className='bg-[#ca3735] hover:bg-[#ca37356e] text-center text-white hover:text-black min-w-[175px] hover:border-black' {...attributes}>
       {title}
     </button>
