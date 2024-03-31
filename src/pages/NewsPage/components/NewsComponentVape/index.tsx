@@ -1,9 +1,9 @@
 import { useQuery } from 'react-query';
-import { NewsItem } from '../NewsItem'
-import { NewsItemProps } from './Types'
+import { NewsItem } from 'src/pages/NewsPage/components/NewsItem'
+import { NewsItemProps } from 'src/pages/NewsPage/types'
 import { fetchNews } from '@/api'
 
-export const NewsComponentDrug: React.FC = () => {
+export const NewsComponentVape: React.FC = () => {
 	// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
 	const { data, isLoading, isError } = useQuery('vape', () => fetchNews('vape', '2024-03-29')) || {};
 
