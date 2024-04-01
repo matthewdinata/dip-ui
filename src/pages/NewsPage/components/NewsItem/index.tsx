@@ -6,14 +6,11 @@ import { NewsItemProps } from '../../types';
 export const NewsItem: React.FC<NewsItemProps> = ({ title, urlToImage, url, publishedAt}) => {
 	const navigate = useNavigate(); // Initialize useNavigate hook
 
-	const openArticlePage = async (event: React.MouseEvent<HTMLAnchorElement>) => {
+	// TODO: Optimize this even further
+	const openArticlePage = (event: React.MouseEvent<HTMLAnchorElement>) => {
 		event.preventDefault();
 		// Fetch the news content from the provided URL
-		const response = await fetch(
-		'https://asia-southeast2-ntu-eee-dip-e028.cloudfunctions.net/dip-backend-functions/fetch_article?url=' + encodeURIComponent(url)
-		);
-		const newsContent = await response.text();
-		navigate(`/news/article?url=${encodeURIComponent(url)}&content=${encodeURIComponent(newsContent)}&title=${encodeURIComponent(title)}&urlToImage=${encodeURIComponent(urlToImage)}&publishedAt=${encodeURIComponent(publishedAt)}`); // Navigate to the article page with the URL parameter
+		navigate(`/news/article?url=${encodeURIComponent(url)}&title=${encodeURIComponent(title)}&urlToImage=${encodeURIComponent(urlToImage)}&publishedAt=${encodeURIComponent(publishedAt)}`); // Navigate to the article page with the URL parameter
 	};
 
 	return (
