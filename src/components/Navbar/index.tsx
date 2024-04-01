@@ -48,7 +48,7 @@ export default function Navbar() {
 				onClick={() =>
 					pathname !== "/" &&
 					pathname !== "/dashboard" &&
-					navigate("/")
+					navigate("/dashboard")
 				}
 			/>
 			<div className="justify-self-end col-start-3">
