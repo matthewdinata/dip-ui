@@ -1,5 +1,5 @@
 import { auth, db, GoogleProvider } from "@/services/firebase";
-import { getRedirectResult, signInWithRedirect } from "firebase/auth";
+import { onAuthStateChanged, signInWithPopup } from "firebase/auth";
 import {
 	doc,
 	DocumentData,
@@ -9,33 +9,39 @@ import {
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { useNavigate } from "react-router-dom";
 
 export default function useAuth() {
 	const [user, loading] = useAuthState(auth);
 	const [userInfo, setUserInfo] = useState<DocumentData | undefined>(
 		undefined
 	);
+	const navigate = useNavigate();
 
 	const login = async () => {
 		try {
-			await signInWithRedirect(auth, GoogleProvider);
-			const res = await getRedirectResult(auth);
-			if (res) {
-				// before making a new doc, check if doc already exists to prevent updating the old doc
-				const docRef = doc(db, "users", res.user.uid);
-				const docSnap = await getDoc(docRef);
-				if (!docSnap.exists()) {
-					await setDoc(doc(db, "users", res.user.uid), {
-						uid: res.user.uid,
-						email: res.user.email,
-						displayName: res.user.displayName,
-						profilePic: res.user.photoURL,
-						avatarId: 1,
-					});
-				}
-			} else {
-				throw new Error("Redirect result is null.");
+			const res = await signInWithPopup(auth, GoogleProvider);
+
+			// before making a new doc, check if doc already exists to prevent updating the old doc
+			const docRef = doc(db, "users", res.user.uid);
+			const docSnap = await getDoc(docRef);
+			if (!docSnap.exists()) {
+				await setDoc(doc(db, "users", res.user.uid), {
+					uid: res.user.uid,
+					email: res.user.email,
+					displayName: res.user.displayName,
+					profilePic: res.user.photoURL,
+					avatarId: 1,
+				});
 			}
+
+			onAuthStateChanged(auth, (user) => {
+				if (user) {
+					navigate("/dashboard");
+				} else {
+					throw new Error("Auth state change encounters an error.");
+				}
+			});
 		} catch (error) {
 			console.error("Error signing in with Google: ", error);
 		}

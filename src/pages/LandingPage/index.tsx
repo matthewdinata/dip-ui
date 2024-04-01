@@ -16,7 +16,6 @@ export default function LandingPage() {
 		if (!user) {
 			await login();
 		}
-		navigate("/dashboard");
 	};
 
 	useEffect(() => {
