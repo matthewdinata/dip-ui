@@ -44,7 +44,8 @@ export default function Navbar() {
 
 			<img
 				src={appLogo}
-				className="w-10 h-10 aspect-square text-center justify-self-center col-start-2"
+				className={`w-10 h-10 aspect-square text-center justify-self-center col-start-2 ${pathname !== "/" ? "cursor-pointer" : ""}`}
+				onClick={() => pathname !== "/" && navigate("/")}
 			/>
 			<div className="justify-self-end col-start-3">
 				{user ? (
