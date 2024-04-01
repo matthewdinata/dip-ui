@@ -9,7 +9,7 @@ import {
 } from "react-router-dom";
 import { ToastProvider } from "./context/ToastContext";
 import { ConfigProvider } from "antd";
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { QueryClient, QueryClientProvider } from "react-query";
 import useAuth from "./hooks/useAuth";
 
 // Components
@@ -27,12 +27,9 @@ import ARwarePage from "./pages/ARwarePage";
 import { QuizRoutes } from "./pages/QuizPage/routes";
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
-	const { user } = useAuth();
-	if (!user) {
-		return <Navigate to="/" replace />;
-	}
+	const { user, loading } = useAuth();
 
-	return children;
+	return user || loading ? children : <Navigate to="/" replace />;
 };
 
 function App() {
@@ -40,7 +37,6 @@ function App() {
 	return (
 		<div>
 			<QueryClientProvider client={queryClient}>
-
 				<ConfigProvider
 					theme={{
 						token: {
@@ -131,7 +127,6 @@ function App() {
 					</ToastProvider>
 				</ConfigProvider>
 			</QueryClientProvider>
-
 		</div>
 	);
 }
