@@ -21,7 +21,7 @@ export default function ProfileModal({
 	isModalOpen: boolean;
 	setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
-	const { userInfo, logout, updateUserData } = useAuth();
+	const { user, userInfo, logout, updateUserData } = useAuth();
 	const { ToastCreate } = useToast();
 
 	const [school, setSchool] = useState<string>("");
@@ -144,7 +144,7 @@ export default function ProfileModal({
 								placeholder="Email"
 								required
 								disabled
-								value={(userInfo?.email as string) ?? ""}
+								value={(user?.email as string) ?? ""}
 							/>
 						</div>
 					</div>
