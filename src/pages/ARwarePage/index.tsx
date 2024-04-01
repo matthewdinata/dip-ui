@@ -13,7 +13,15 @@ export default function ARwarePage() {
 				</div>
 				<div className="flex flex-col flex-1 gap-8 items-center justify-center">
 					<img src={mobileDownload} className="md:w-64 w-48" />
-					<div className="text-white bg-red-700 flex flex-1 px-8 md:px-16 py-3 font-medium text-sm sm:text-base md:text-lg rounded-2xl hover:bg-red-600 transition-all cursor-pointer text-center items-center gap-2">
+					<div
+						className="text-white bg-red-700 flex flex-1 px-8 md:px-16 py-3 font-medium text-sm sm:text-base md:text-lg rounded-2xl hover:bg-red-600 transition-all cursor-pointer text-center items-center gap-2"
+						onClick={() =>
+							window.open(
+								"https://entuedu-my.sharepoint.com/:u:/g/personal/geor0014_e_ntu_edu_sg/ESUUf1l--GVKhzrtLhOpYtABEEI4Z_AxqzRA_FDylsUCCA?e=aasqZd",
+								"_blank"
+							)
+						}
+					>
 						Download now{" "}
 						<>
 							<IoLogoAndroid className="text-2xl -mt-1" />
