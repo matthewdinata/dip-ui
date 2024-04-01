@@ -8,7 +8,8 @@ export default function ARwarePage() {
 			<div className="mt-12 py-12 px-8 md:px-16 flex flex-col items-center gap-16 bg-white drop-shadow-lg rounded-xl">
 				<div className="text-xl sm:text-2xl md:text-3xl font-semibold text-red-700 text-center">
 					Step into the augmented reality of drug education like never
-					before!
+					before with{" "}
+					<span className="text-red-600 italic">Be Drug ARWare</span>!
 				</div>
 				<div className="flex flex-col flex-1 gap-8 items-center justify-center">
 					<img src={mobileDownload} className="md:w-64 w-48" />
