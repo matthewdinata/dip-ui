@@ -8,7 +8,7 @@ export const NewsComponent: React.FC = () => {
 	const [thumbnailsToShow, setThumbnailsToShow] = useState(1);
 
 	// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-	const { data, isLoading, isError } = useQuery('drug', () => fetchNews('drug', '2024-03-29')) || {};
+	const { data, isLoading, isError } = useQuery('drug', () => fetchNews('drug', '2024-04-12')) || {};
 
 	useEffect(() => {
         const handleResize = () => {
