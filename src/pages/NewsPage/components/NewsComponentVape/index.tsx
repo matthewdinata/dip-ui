@@ -5,7 +5,7 @@ import { NewsItemProps } from '../../types';
 
 export const NewsComponentVape: React.FC = () => {
 	// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-	const { data, isLoading, isError } = useQuery('vape', () => fetchNews('vape', '2024-03-29')) || {};
+	const { data, isLoading, isError } = useQuery('vape', () => fetchNews('vape', '2024-04-12')) || {};
 
 	if (isLoading) {
 		return <div>Loading...</div>;
